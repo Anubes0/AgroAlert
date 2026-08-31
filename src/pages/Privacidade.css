@@ -1,0 +1,68 @@
+/* --- pagina de privacidade / documento legal --- */
+.documento h2 {
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    color: #fff;
+    margin: 36px 0 12px;
+    padding-top: 10px;
+    border-top: 1px solid var(--cor-borda);
+}
+
+.documento h2:first-of-type { border-top: none; padding-top: 0; }
+
+.documento h3 {
+    font-size: 16px;
+    color: var(--cor-verde);
+    margin: 20px 0 8px;
+}
+
+.documento p,
+.documento li {
+    color: var(--cor-texto);
+    font-size: 14.5px;
+    line-height: 1.75;
+    margin-bottom: 10px;
+}
+
+.documento ul { margin: 0 0 14px 20px; }
+.documento li { margin-bottom: 6px; }
+
+.documento .aviso-academico {
+    margin-bottom: 28px;
+    padding: 14px 18px;
+    border-left: 3px solid var(--cor-amber);
+    background: rgba(251, 191, 36, 0.07);
+    border-radius: 6px;
+    font-size: 13px;
+    color: var(--cor-texto-fraco);
+}
+
+.documento .meta-doc {
+    margin-top: 8px;
+    font-size: 13px;
+    color: var(--cor-texto-fraco);
+}
+
+/* tabela de dados tratados */
+.tabela-dados {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 8px 0 16px;
+    font-size: 13.5px;
+}
+
+.tabela-dados th,
+.tabela-dados td {
+    text-align: left;
+    padding: 10px 12px;
+    border: 1px solid var(--cor-borda);
+    vertical-align: top;
+}
+
+.tabela-dados th {
+    background: var(--cor-fundo2);
+    color: #fff;
+    font-weight: 600;
+}
+
+.tabela-dados td { color: var(--cor-texto-fraco); }

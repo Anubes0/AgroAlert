@@ -1,0 +1,276 @@
+/* =============================================
+   SECAO PLANOS - cards de assinatura
+   ============================================= */
+
+#secao-planos {
+    padding: 100px 80px;
+    background: linear-gradient(180deg, transparent, rgba(18, 32, 21, 0.3), transparent);
+}
+
+/* --- toggle de cobranca: mensal / anual --- */
+#toggle-cobranca {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    margin: -28px auto 44px;
+}
+
+.rotulo-cobranca {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--cor-texto-fraco);
+    transition: color 0.2s;
+}
+
+.rotulo-cobranca.ativo { color: #fff; }
+
+#selo-economia {
+    display: inline-block;
+    margin-left: 4px;
+    background: rgba(74, 222, 128, 0.12);
+    border: 1px solid rgba(74, 222, 128, 0.25);
+    color: var(--cor-verde);
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 100px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+#switch-cobranca {
+    position: relative;
+    width: 52px;
+    height: 28px;
+    padding: 0;
+    border: 1px solid var(--cor-borda);
+    border-radius: 100px;
+    background: var(--cor-fundo2);
+    cursor: pointer;
+    transition: background 0.25s, border-color 0.25s;
+}
+
+#switch-cobranca[aria-checked="true"] {
+    background: var(--cor-verde-medio);
+    border-color: var(--cor-verde);
+}
+
+#bolinha-switch {
+    position: absolute;
+    top: 50%;
+    left: 3px;
+    transform: translateY(-50%);
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: var(--cor-verde);
+    transition: left 0.25s ease;
+}
+
+#switch-cobranca[aria-checked="true"] #bolinha-switch { left: 27px; }
+
+/* --- grade de cards --- */
+#grade-planos {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.card-plano {
+    background: rgba(18, 32, 21, 0.6);
+    border: 1px solid var(--cor-borda);
+    border-radius: 16px;
+    padding: 32px;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.card-plano:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 28px 60px rgba(0, 0, 0, 0.4);
+}
+
+/* plano destaque com borda e brilho verde */
+#plano-destaque {
+    border: 2px solid var(--cor-verde);
+    box-shadow: 0 0 30px rgba(74, 222, 128, 0.12);
+    margin-top: -10px;
+}
+
+#plano-destaque:hover {
+    box-shadow: 0 28px 60px rgba(74, 222, 128, 0.2);
+}
+
+.badge-popular {
+    position: absolute;
+    top: -13px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--cor-verde);
+    color: #0d1410;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 14px;
+    border-radius: 100px;
+    white-space: nowrap;
+}
+
+.icone-plano {
+    color: var(--cor-verde);
+    margin-bottom: 8px;
+    display: inline-block;
+}
+
+.icone-plano svg {
+    width: 30px;
+    height: 30px;
+}
+
+.nome-plano {
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 4px;
+}
+
+.descricao-plano {
+    font-size: 12px;
+    color: var(--cor-texto-fraco);
+    margin-bottom: 20px;
+}
+
+.preco-plano {
+    font-family: 'Fraunces', serif;
+    font-size: 2.8rem;
+    font-weight: 900;
+    color: var(--cor-verde);
+    margin-bottom: 4px;
+}
+
+.periodo-plano {
+    font-size: 12px;
+    color: var(--cor-texto-fraco);
+    margin-bottom: 24px;
+}
+
+.divisor-plano {
+    height: 1px;
+    background: var(--cor-borda);
+    border: none;
+    margin-bottom: 20px;
+}
+
+.lista-features {
+    list-style: none;
+    margin-bottom: 28px;
+}
+
+.lista-features li {
+    font-size: 13px;
+    padding: 5px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.lista-features li.ativo {
+    color: var(--cor-texto);
+}
+
+/* item desativado com risco */
+.lista-features li.inativo {
+    color: var(--cor-texto-fraco);
+    text-decoration: line-through;
+    opacity: 0.5;
+}
+
+.lista-features li.ativo::before {
+    content: '◉';
+    color: var(--cor-verde);
+    font-size: 10px;
+    flex-shrink: 0;
+}
+
+.lista-features li.inativo::before {
+    content: '—';
+    color: var(--cor-texto-fraco);
+    flex-shrink: 0;
+}
+
+/* botao principal verde nos planos */
+.btn-plano-principal {
+    width: 100%;
+    background: var(--cor-verde);
+    color: #0d1410;
+    border: none;
+    padding: 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.05em;
+    transition: all 0.2s;
+}
+
+.btn-plano-principal:hover {
+    box-shadow: 0 8px 24px rgba(74, 222, 128, 0.35);
+}
+
+/* botao secundario nos planos */
+.btn-plano-secundario {
+    width: 100%;
+    background: transparent;
+    color: var(--cor-texto-fraco);
+    border: 1px solid var(--cor-borda);
+    padding: 13px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    transition: all 0.2s;
+}
+
+.btn-plano-secundario:hover {
+    color: var(--cor-texto);
+    border-color: rgba(74, 222, 128, 0.3);
+}
+
+#rodape-planos {
+    text-align: center;
+    margin-top: 28px;
+    font-size: 12px;
+    color: #2a4a2e;
+}
+
+/* card de plano selecionado (ao clicar no botao) */
+.card-plano.selecionado {
+    border-color: var(--cor-verde);
+    box-shadow: 0 0 0 1px var(--cor-verde), 0 18px 40px rgba(74, 222, 128, 0.12);
+}
+
+.card-plano.selecionado::after {
+    content: "✓ Selecionado";
+    position: absolute;
+    bottom: 14px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--cor-verde);
+    letter-spacing: 0.03em;
+}
+
+@media (max-width: 900px) {
+    #secao-planos {
+        padding: 60px 32px;
+    }
+
+    #grade-planos {
+        grid-template-columns: 1fr;
+    }
+}

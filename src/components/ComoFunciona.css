@@ -1,0 +1,110 @@
+/* =============================================
+   SECAO COMO FUNCIONA - os 4 passos
+   ============================================= */
+
+#secao-como-funciona {
+    padding: 100px 80px;
+    position: relative;
+}
+
+/* grade com 4 colunas para os passos */
+#grade-passos {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 40px;
+}
+
+/* card-passo: border-top transparente reserva o espaco da barrinha verde */
+.card-passo {
+    background: rgba(18, 32, 21, 0.8);
+    border: 1px solid var(--cor-borda);
+    border-top: 4px solid transparent;
+    border-radius: 12px;
+    padding: 24px;
+    transition: all 0.25s ease;
+    cursor: default;
+}
+
+/* ao passar o mouse a barrinha verde aparece e o numero clareia */
+.card-passo:hover {
+    transform: translateY(-6px);
+    border-color: rgba(74, 222, 128, 0.3);
+    border-top-color: rgba(74, 222, 128, 0.8);
+    background: rgba(18, 32, 21, 0.95);
+}
+
+.card-passo:hover .numero-passo {
+    color: rgba(74, 222, 128, 0.25);
+}
+
+.numero-passo {
+    font-family: 'Fraunces', serif;
+    font-size: 3rem;
+    font-weight: 900;
+    color: var(--cor-borda);
+    margin-bottom: 12px;
+    transition: color 0.25s;
+}
+
+.icone-passo {
+    color: var(--cor-verde);
+    margin-bottom: 12px;
+    display: inline-block;
+}
+
+.icone-passo svg {
+    width: 28px;
+    height: 28px;
+}
+
+.card-passo h3 {
+    font-size: 15px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 8px;
+}
+
+.card-passo p {
+    font-size: 13px;
+    color: var(--cor-texto-fraco);
+    line-height: 1.6;
+}
+
+/* barra mostrando o fluxo produtor > bot > comprador */
+#barra-fluxo {
+    background: #122015;
+    border-radius: 10px;
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 32px;
+    font-size: 13px;
+}
+
+.ator-fluxo {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.ator-fluxo .cor-verde  { color: var(--cor-verde); }
+.ator-fluxo .cor-amber  { color: var(--cor-amber); }
+.ator-fluxo .cor-azul   { color: var(--cor-azul); }
+.ator-fluxo .cor-branco { color: var(--cor-texto); }
+
+@media (max-width: 900px) {
+    #secao-como-funciona {
+        padding: 60px 32px;
+    }
+
+    #grade-passos {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    #barra-fluxo {
+        flex-direction: column;
+        gap: 12px;
+    }
+}

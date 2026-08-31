@@ -1,0 +1,61 @@
+/* =============================================
+   PAGINAS INTERNAS (funcionamento / privacidade)
+   partes compartilhadas pelas duas paginas
+   ============================================= */
+
+.hero-pagina {
+    padding: 140px 80px 60px;
+    text-align: center;
+    border-bottom: 1px solid var(--cor-borda);
+    background:
+        radial-gradient(circle at 50% 0%, rgba(74, 222, 128, 0.06), transparent 60%),
+        var(--cor-fundo);
+}
+
+.hero-pagina .badge-secao { margin: 0 auto 16px; }
+
+.hero-pagina h1 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 900;
+    color: #fff;
+    margin-bottom: 14px;
+    line-height: 1.1;
+}
+
+.hero-pagina p {
+    max-width: 640px;
+    margin: 0 auto;
+    color: var(--cor-texto-fraco);
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.trilha-volta {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 28px;
+    background: transparent;
+    border: none;
+    color: var(--cor-verde);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+.trilha-volta:hover { text-decoration: underline; }
+
+/* container de conteudo das paginas internas */
+.conteudo-pagina {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 70px 32px 90px;
+}
+
+@media (max-width: 900px) {
+    .hero-pagina { padding: 110px 24px 48px; }
+    .conteudo-pagina { padding: 48px 22px 70px; }
+}

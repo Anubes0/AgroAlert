@@ -1,0 +1,37 @@
+/* =============================================
+   BOTAO VOLTAR AO TOPO
+   ============================================= */
+
+#btn-topo {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    border: 1px solid var(--cor-verde);
+    background: var(--cor-verde-escuro);
+    color: var(--cor-verde);
+    font-size: 20px;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: opacity 0.25s ease, transform 0.25s ease, background 0.2s ease;
+    z-index: 200;
+}
+
+#btn-topo.visivel {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+#btn-topo:hover {
+    background: var(--cor-verde);
+    color: #06140c;
+}

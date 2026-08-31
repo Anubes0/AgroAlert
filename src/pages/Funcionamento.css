@@ -1,0 +1,187 @@
+/* --- timeline do funcionamento detalhado --- */
+.timeline {
+    position: relative;
+    margin-top: 20px;
+    padding-left: 44px;
+}
+
+.timeline::before {
+    content: "";
+    position: absolute;
+    left: 17px;
+    top: 8px;
+    bottom: 8px;
+    width: 2px;
+    background: linear-gradient(var(--cor-verde), var(--cor-verde-medio));
+}
+
+.etapa {
+    position: relative;
+    margin-bottom: 40px;
+}
+
+.etapa:last-child { margin-bottom: 0; }
+
+.etapa .marcador {
+    position: absolute;
+    left: -44px;
+    top: 0;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--cor-verde-escuro);
+    border: 1px solid var(--cor-verde);
+    color: var(--cor-verde);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.etapa h3 {
+    font-size: 18px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 6px;
+}
+
+.etapa .papel {
+    display: inline-block;
+    margin-bottom: 10px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--cor-verde);
+    background: rgba(74, 222, 128, 0.1);
+    border: 1px solid rgba(74, 222, 128, 0.25);
+    padding: 2px 10px;
+    border-radius: 100px;
+}
+
+.etapa p {
+    color: var(--cor-texto-fraco);
+    font-size: 14px;
+    line-height: 1.7;
+    margin-bottom: 8px;
+}
+
+/* citacao de exemplo em destaque, dentro da 1a etapa */
+.destaque-etapa {
+    color: #fff;
+    background: rgba(74, 222, 128, 0.08);
+    border: 1px solid var(--cor-borda);
+    border-radius: 10px;
+    padding: 12px 16px;
+}
+
+.etapa ul {
+    list-style: none;
+    margin-top: 8px;
+}
+
+.etapa ul li {
+    position: relative;
+    padding-left: 20px;
+    color: var(--cor-texto-fraco);
+    font-size: 13.5px;
+    line-height: 1.7;
+}
+
+.etapa ul li::before {
+    content: "▸";
+    position: absolute;
+    left: 0;
+    color: var(--cor-verde);
+}
+
+/* destaque da etapa de geolocalizacao */
+.bloco-geo {
+    margin-top: 40px;
+    padding: 28px;
+    border: 1px solid var(--cor-verde-medio);
+    border-radius: 16px;
+    background: rgba(74, 222, 128, 0.05);
+}
+
+.bloco-geo h3 {
+    font-size: 18px;
+    color: #fff;
+    margin-bottom: 12px;
+}
+
+.bloco-geo p {
+    color: var(--cor-texto-fraco);
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+/* "mapa" esquematico do raio de geolocalizacao */
+.mapa-raio {
+    position: relative;
+    width: 260px;
+    height: 260px;
+    margin: 24px auto 8px;
+}
+
+.mapa-raio .anel {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    border: 1px dashed var(--cor-verde-medio);
+}
+
+.mapa-raio .anel.r1 { width: 90px; height: 90px; }
+.mapa-raio .anel.r2 { width: 170px; height: 170px; }
+.mapa-raio .anel.r3 { width: 250px; height: 250px; }
+
+.mapa-raio .centro {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--cor-verde);
+    box-shadow: 0 0 0 6px rgba(74, 222, 128, 0.2);
+    z-index: 2;
+}
+
+.mapa-raio .ponto {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--cor-azul);
+    transform: translate(-50%, -50%);
+}
+
+.mapa-raio .ponto.fora { background: var(--cor-texto-fraco); opacity: 0.5; }
+
+.legenda-mapa {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: center;
+    margin-top: 12px;
+    font-size: 12px;
+    color: var(--cor-texto-fraco);
+}
+
+.legenda-mapa span { display: inline-flex; align-items: center; gap: 6px; }
+
+.legenda-mapa .bolinha {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+@media (max-width: 900px) {
+    .timeline { padding-left: 38px; }
+    .etapa .marcador { left: -38px; }
+}

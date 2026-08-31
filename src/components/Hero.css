@@ -1,0 +1,396 @@
+/* =============================================
+   SECAO HERO - primeira tela do site
+   ============================================= */
+
+#secao-hero {
+    min-height: 100vh;
+    padding-top: 64px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding-left: 80px;
+    padding-right: 80px;
+    gap: 60px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* gradiente de fundo do hero */
+#secao-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 20% 50%, rgba(74, 222, 128, 0.06) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 20%, rgba(74, 222, 128, 0.04) 0%, transparent 40%);
+    pointer-events: none;
+}
+
+/* grade de pontos animada no fundo */
+#grade-pontos {
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(rgba(74, 222, 128, 0.15) 1px, transparent 1px);
+    background-size: 32px 32px;
+    opacity: 0.4;
+    animation: grade-move 4s ease forwards;
+    pointer-events: none;
+}
+
+@keyframes grade-move {
+    from { opacity: 0; transform: scale(1.05); }
+    to   { opacity: 0.4; transform: scale(1); }
+}
+
+/* orbs - bolinhas de luz flutuantes no fundo */
+.orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+    pointer-events: none;
+    animation: orbFlutua 9s ease-in-out infinite;
+}
+
+#orb1 {
+    width: 300px;
+    height: 300px;
+    background: rgba(74, 222, 128, 0.08);
+    top: 10%;
+    left: 5%;
+    animation-delay: 0s;
+}
+
+#orb2 {
+    width: 200px;
+    height: 200px;
+    background: rgba(74, 222, 128, 0.06);
+    bottom: 20%;
+    left: 30%;
+    animation-delay: 3s;
+}
+
+#orb3 {
+    width: 250px;
+    height: 250px;
+    background: rgba(74, 222, 128, 0.05);
+    top: 40%;
+    right: 5%;
+    animation-delay: 6s;
+}
+
+@keyframes orbFlutua {
+    0%, 100% { transform: translateY(0px); }
+    50%       { transform: translateY(-20px); }
+}
+
+/* linha de scan que passa pela tela */
+#linha-scan {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(74, 222, 128, 0.3), transparent);
+    animation: scanLine 8s linear infinite;
+    pointer-events: none;
+}
+
+@keyframes scanLine {
+    0%   { top: 0; }
+    100% { top: 100%; }
+}
+
+/* conteudo textual do lado esquerdo */
+#hero-conteudo-esq {
+    position: relative;
+    z-index: 1;
+}
+
+#badge-whatsapp {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(74, 222, 128, 0.08);
+    border: 1px solid rgba(74, 222, 128, 0.2);
+    padding: 6px 14px;
+    border-radius: 100px;
+    font-size: 13px;
+    color: var(--cor-verde);
+    margin-bottom: 24px;
+}
+
+#badge-whatsapp::before {
+    content: '◉';
+    font-size: 10px;
+}
+
+#titulo-hero {
+    font-family: 'Fraunces', serif;
+    font-weight: 900;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    line-height: 1.1;
+    margin-bottom: 16px;
+}
+
+#titulo-hero .linha-normal {
+    color: #fff;
+}
+
+/* texto com efeito degrade verde */
+#titulo-hero .linha-destaque {
+    background: linear-gradient(135deg, var(--cor-verde), #86efac);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+#subtitulo-hero {
+    font-size: 1.1rem;
+    color: var(--cor-texto-fraco);
+    line-height: 1.6;
+    margin-bottom: 36px;
+    font-weight: 400;
+}
+
+#botoes-hero {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 40px;
+}
+
+/* botao verde cheio */
+.btn-verde {
+    background: var(--cor-verde);
+    color: #0d1410;
+    border: none;
+    padding: 14px 28px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    transition: all 0.2s;
+    letter-spacing: 0.05em;
+}
+
+.btn-verde:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(74, 222, 128, 0.3);
+}
+
+/* botao transparente com borda */
+.btn-fantasma {
+    background: transparent;
+    color: var(--cor-texto);
+    border: 2px solid var(--cor-verde-escuro);
+    padding: 14px 28px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    transition: all 0.2s;
+}
+
+.btn-fantasma:hover {
+    border-color: rgba(74, 222, 128, 0.5);
+    transform: translateY(-2px);
+}
+
+/* link do pitch video na home (hero) */
+#link-pitch-video {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 20px;
+    color: var(--cor-verde);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s;
+}
+
+#link-pitch-video:hover {
+    border-bottom-color: var(--cor-verde);
+}
+
+/* barra com icones de confianca */
+#barra-confianca {
+    display: flex;
+    gap: 24px;
+    border-top: 1px solid var(--cor-borda);
+    padding-top: 24px;
+    margin-top: 20px;
+    list-style: none;
+}
+
+.item-confianca {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: var(--cor-texto-fraco);
+}
+
+.item-confianca::before {
+    content: '✓';
+    color: var(--cor-verde);
+    font-weight: 700;
+}
+
+/* numeros de estatistica no hero */
+#numeros-hero {
+    display: flex;
+    gap: 32px;
+    margin-top: 32px;
+}
+
+.numero-stat {
+    text-align: left;
+}
+
+.numero-stat .valor {
+    font-family: 'Fraunces', serif;
+    font-weight: 900;
+    font-size: 2.5rem;
+    color: var(--cor-verde);
+}
+
+.numero-stat .label {
+    font-size: 12px;
+    color: var(--cor-texto-fraco);
+}
+
+/* mockup do chat whatsapp - lado direito do hero */
+#hero-chat {
+    position: relative;
+    z-index: 1;
+    animation: flutuaChat 5s ease-in-out infinite;
+}
+
+@keyframes flutuaChat {
+    0%, 100% { transform: translateY(0px); }
+    50%       { transform: translateY(-14px); }
+}
+
+#janela-chat {
+    background: #0d1f14;
+    border: 1px solid var(--cor-verde-escuro);
+    border-radius: 16px;
+    overflow: hidden;
+    max-width: 380px;
+    margin: 0 auto;
+}
+
+#cabecalho-chat {
+    background: #0a1a0f;
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid var(--cor-borda);
+}
+
+#avatar-bot {
+    width: 40px;
+    height: 40px;
+    background: var(--cor-verde);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    color: #0d1410;
+    font-family: 'Fraunces', serif;
+    font-size: 16px;
+}
+
+#info-bot strong {
+    display: block;
+    font-size: 14px;
+    font-weight: 700;
+    color: #fff;
+}
+
+#indicador-online {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+    color: var(--cor-verde);
+}
+
+/* pontinho verde piscando */
+#ponto-online {
+    width: 7px;
+    height: 7px;
+    background: var(--cor-verde);
+    border-radius: 50%;
+    animation: pulsa 2s infinite;
+}
+
+@keyframes pulsa {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0.3; }
+}
+
+#mensagens-chat {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* balao de mensagem do bot */
+.mensagem-bot {
+    background: rgba(30, 51, 35, 0.6);
+    border: 1px solid rgba(74, 222, 128, 0.1);
+    border-radius: 12px 12px 12px 2px;
+    padding: 10px 14px;
+    font-size: 13px;
+    color: #b8d4c0;
+    max-width: 90%;
+}
+
+/* balao de mensagem do usuario */
+.mensagem-usuario {
+    background: var(--cor-verde);
+    border-radius: 12px 12px 2px 12px;
+    padding: 10px 14px;
+    font-size: 13px;
+    color: #0d1410;
+    font-weight: 600;
+    align-self: flex-end;
+    max-width: 90%;
+}
+
+/* balao de alerta amarelo */
+.mensagem-alerta {
+    background: rgba(34, 31, 13, 0.8);
+    border: 1px solid rgba(251, 191, 36, 0.3);
+    border-radius: 12px;
+    padding: 10px 14px;
+    font-size: 13px;
+    color: var(--cor-amber);
+    max-width: 90%;
+}
+
+@media (max-width: 900px) {
+    #secao-hero {
+        grid-template-columns: 1fr;
+        padding: 100px 32px 60px;
+    }
+
+    #hero-chat {
+        display: none;
+    }
+
+    #botoes-hero {
+        flex-direction: column;
+    }
+
+    #botoes-hero .btn-verde,
+    #botoes-hero .btn-fantasma {
+        width: 100%;
+        justify-content: center;
+    }
+}

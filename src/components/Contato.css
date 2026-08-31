@@ -1,0 +1,293 @@
+/* =============================================
+   SECAO CONTATO - formulario e informacoes
+   ============================================= */
+
+#secao-contato {
+    padding: 100px 80px;
+}
+
+#container-contato {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 40px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* painel esquerdo com informacoes de contato */
+#painel-info-contato {
+    background: linear-gradient(160deg, #0d2810, #071207);
+    border: 1px solid var(--cor-borda);
+    border-radius: 16px;
+    padding: 32px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* circulos decorativos no painel */
+#painel-info-contato::before {
+    content: '';
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    border: 1px solid rgba(74, 222, 128, 0.07);
+    top: -60px;
+    right: -60px;
+}
+
+#painel-info-contato::after {
+    content: '';
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    border: 1px solid rgba(74, 222, 128, 0.04);
+    bottom: -100px;
+    left: -100px;
+}
+
+#titulo-info-contato {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 4px;
+    color: #fff;
+}
+
+#subtitulo-info-contato {
+    color: var(--cor-verde);
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 28px;
+    font-family: 'Fraunces', serif;
+}
+
+.item-contato {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.icone-contato-bg {
+    width: 36px;
+    height: 36px;
+    background: rgba(74, 222, 128, 0.1);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+}
+
+.item-contato p {
+    font-size: 13px;
+    color: var(--cor-texto-fraco);
+}
+
+.item-contato strong {
+    display: block;
+    font-size: 14px;
+    color: var(--cor-texto);
+    margin-bottom: 2px;
+}
+
+/* painel direito com o formulario */
+#painel-formulario {
+    background: rgba(18, 32, 21, 0.5);
+    border: 1px solid var(--cor-borda);
+    border-radius: 16px;
+    padding: 36px;
+}
+
+#painel-formulario h3 {
+    font-size: 22px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 24px;
+}
+
+/* grade de 2 colunas para os campos */
+.grade-campos {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.campo-grupo {
+    margin-bottom: 16px;
+}
+
+.campo-grupo label {
+    display: block;
+    font-size: 12px;
+    color: var(--cor-texto-fraco);
+    margin-bottom: 6px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+/* estilo dos inputs, selects e textareas */
+.campo-grupo input,
+.campo-grupo select,
+.campo-grupo textarea {
+    width: 100%;
+    background: rgba(13, 20, 16, 0.8);
+    border: 1px solid var(--cor-borda);
+    border-radius: 8px;
+    padding: 12px 14px;
+    color: var(--cor-texto);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 14px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    outline: none;
+}
+
+.campo-grupo input::placeholder,
+.campo-grupo textarea::placeholder {
+    color: var(--cor-texto-fraco);
+    opacity: 0.5;
+}
+
+/* borda verde quando o campo esta em foco */
+.campo-grupo input:focus,
+.campo-grupo select:focus,
+.campo-grupo textarea:focus {
+    border-color: var(--cor-verde);
+    box-shadow: 0 0 0 3px rgba(74, 222, 128, 0.12);
+}
+
+.campo-grupo select {
+    cursor: pointer;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.campo-grupo select option {
+    background: #122015;
+}
+
+#campo-mensagem {
+    min-height: 120px;
+    resize: vertical;
+}
+
+/* campo plano com destaque verde */
+#campo-plano-interesse input {
+    border-color: rgba(74, 222, 128, 0.5);
+    color: var(--cor-verde);
+    cursor: default;
+}
+
+/* checkbox lgpd */
+#grupo-lgpd {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 6px;
+}
+
+#checkbox-lgpd {
+    width: 16px;
+    height: 16px;
+    margin-top: 2px;
+    accent-color: var(--cor-verde);
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+#grupo-lgpd label {
+    font-size: 12px;
+    color: var(--cor-texto-fraco);
+    line-height: 1.5;
+    cursor: pointer;
+}
+
+/* mensagem de erro abaixo dos campos */
+.msg-erro {
+    display: none;
+    font-size: 11px;
+    color: #f87171;
+    margin-top: 4px;
+}
+
+.msg-erro.visivel {
+    display: block;
+}
+
+.msg-erro-lgpd {
+    margin-bottom: 14px;
+}
+
+/* botao de enviar mensagem */
+#btn-enviar {
+    width: 100%;
+    background: var(--cor-verde);
+    color: #0d1410;
+    border: none;
+    padding: 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: 0.05em;
+    transition: all 0.2s;
+}
+
+#btn-enviar:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(74, 222, 128, 0.35);
+}
+
+/* tela de confirmacao depois de enviar o formulario */
+#mensagem-confirmacao {
+    text-align: center;
+    padding: 40px;
+}
+
+#mensagem-confirmacao .icone-ok {
+    font-size: 48px;
+    margin-bottom: 16px;
+}
+
+#mensagem-confirmacao h4 {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--cor-verde);
+    margin-bottom: 8px;
+}
+
+#mensagem-confirmacao p {
+    color: var(--cor-texto-fraco);
+    font-size: 14px;
+}
+
+/* =============================================
+   CONTADOR DE CARACTERES DA MENSAGEM
+   ============================================= */
+
+.contador-caracteres {
+    display: block;
+    margin-top: 4px;
+    font-size: 11px;
+    text-align: right;
+    color: var(--cor-texto-fraco);
+    transition: color 0.2s;
+}
+
+.contador-caracteres.alerta { color: var(--cor-amber); }
+.contador-caracteres.limite { color: #f87171; }
+
+@media (max-width: 900px) {
+    #secao-contato {
+        padding: 60px 32px;
+    }
+
+    #container-contato {
+        grid-template-columns: 1fr;
+    }
+}
