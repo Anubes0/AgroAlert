@@ -5,6 +5,7 @@ import './Navbar.css'
 const linksMenu = [
     { id: 'secao-hero', rotulo: 'Início' },
     { id: 'secao-como-funciona', rotulo: 'Como Funciona' },
+    { id: 'secao-simulador-financeiro', rotulo: 'Simulador' },
     { id: 'secao-planos', rotulo: 'Planos' },
     { id: 'secao-impacto', rotulo: 'Impacto' },
     { id: 'secao-faq', rotulo: 'FAQ' },
@@ -41,7 +42,7 @@ function Navbar({ paginaAtual, navegarPara }) {
                     }
                 })
             },
-            { rootMargin: '-45% 0px -50% 0px' }
+            { rootMargin: '-50% 0px -50% 0px' }
         )
 
         secoes.forEach((secao) => observador.observe(secao))
