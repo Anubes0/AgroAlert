@@ -14,8 +14,8 @@ npm install
 npm run dev
 ```
 
-Abre em `http://localhost:5173`. Para gerar a build de produção (a mesma pasta
-`dist/` que sobe pro Vercel):
+Abre em `http://localhost:5173`. Para gerar a build de produção (a pasta
+`dist/`):
 
 ```bash
 npm run build
@@ -77,11 +77,6 @@ props/estado), CSS externo por componente (`import './Componente.css'`) e imagen
 
 ## Pendências
 
-- **Funcionalidade nova**: o enunciado da Fase 5 pede uma funcionalidade além do
-  Fale Conosco (ver `../README.md`, seção "Decisões"). Esta versão é só a migração
-  pra React — a funcionalidade nova entra numa etapa seguinte.
-- Fazer o **deploy** do build (`npm run build` → pasta `dist/`) num provedor gratuito
-  (ex.: Vercel) e registrar a URL.
 - Gravar e publicar o **Pitch Vídeo** (até 3 min, só a funcionalidade nova + como o
   React foi aplicado) e inserir o link na Home (`src/components/Hero.jsx`, constante
   `LINK_PITCH_VIDEO`) e no PDF de entrega.
