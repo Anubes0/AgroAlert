@@ -1,0 +1,557 @@
+/* =============================================
+   MAPA INTERATIVO - Leaflet + OpenStreetMap,
+   busca (Nominatim) e clima (Open-Meteo)
+   ============================================= */
+
+#secao-mapa {
+    padding: 100px 80px;
+}
+
+/* --- barra de busca e filtros --- */
+.barra-mapa {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    margin-bottom: 24px;
+    padding: 24px;
+    background: rgba(18, 32, 21, 0.4);
+    border: 2px solid rgba(74, 222, 128, 0.15);
+    border-radius: 16px;
+}
+
+.busca-mapa {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.busca-mapa .input-mapa {
+    flex: 1 1 260px;
+}
+
+.input-mapa {
+    padding: 10px 14px;
+    border: 2px solid rgba(74, 222, 128, 0.1);
+    border-radius: 8px;
+    font-size: 14px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background: rgba(13, 20, 16, 0.6);
+    color: var(--cor-texto);
+}
+
+.input-mapa:focus {
+    outline: none;
+    border-color: var(--cor-verde);
+    box-shadow: 0 0 0 3px rgba(74, 222, 128, 0.15);
+}
+
+.input-mapa::placeholder {
+    color: rgba(154, 165, 177, 0.5);
+}
+
+.input-mapa option {
+    background: var(--cor-fundo2);
+}
+
+.botao-mapa {
+    padding: 10px 20px;
+    border: 2px solid var(--cor-verde);
+    border-radius: 8px;
+    background: var(--cor-verde);
+    color: #06140c;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.botao-mapa:hover { transform: translateY(-2px); }
+.botao-mapa:disabled { opacity: 0.6; cursor: wait; transform: none; }
+
+.botao-mapa.botao-secundario {
+    background: transparent;
+    color: var(--cor-verde);
+}
+
+.botao-mapa.botao-secundario:hover { background: rgba(74, 222, 128, 0.08); }
+
+.filtros-mapa {
+    display: flex;
+    align-items: flex-end;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+
+.grupo-filtro-tipo {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.chip-filtro {
+    padding: 8px 16px;
+    border: 1px solid var(--cor-borda);
+    border-radius: 100px;
+    background: transparent;
+    color: var(--cor-texto-fraco);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.chip-filtro:hover { color: var(--cor-verde); border-color: var(--cor-verde-medio); }
+
+.chip-filtro.ativo {
+    background: rgba(74, 222, 128, 0.12);
+    border-color: var(--cor-verde);
+    color: var(--cor-verde);
+}
+
+.campo-filtro {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--cor-texto-fraco);
+}
+
+.campo-filtro strong { color: var(--cor-verde); }
+
+.campo-raio {
+    flex: 1 1 220px;
+}
+
+.campo-raio input[type="range"] {
+    width: 100%;
+    accent-color: var(--cor-verde);
+    cursor: pointer;
+}
+
+.status-busca {
+    font-size: 13px;
+    color: var(--cor-texto-fraco);
+}
+
+.status-busca.status-erro { color: #f87171; }
+
+/* --- mapa + painel lateral --- */
+.container-mapa {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+    gap: 24px;
+    align-items: stretch;
+}
+
+.moldura-mapa {
+    /* os paineis do Leaflet usam z-index ate 1000; isolar aqui evita
+       que o mapa passe por cima da navbar fixa ao rolar a pagina */
+    isolation: isolate;
+    display: flex;
+    flex-direction: column;
+    border: 2px solid rgba(74, 222, 128, 0.2);
+    border-radius: 16px;
+    overflow: hidden;
+    background: var(--cor-fundo2);
+}
+
+.mapa-leaflet {
+    flex: 1;
+    min-height: 520px;
+}
+
+.mapa-leaflet.leaflet-container {
+    background: var(--cor-fundo);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+/* inverte as cores do tile padrao do OSM para um mapa escuro */
+.mapa-leaflet .camada-escura {
+    filter: invert(1) hue-rotate(180deg) brightness(0.85) contrast(0.9) saturate(0.6);
+}
+
+.legenda-mapa {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 20px;
+    list-style: none;
+    padding: 12px 16px;
+    border-top: 1px solid var(--cor-borda);
+    font-size: 12px;
+    color: var(--cor-texto-fraco);
+}
+
+.legenda-mapa li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.legenda-mapa .pino-mapa {
+    width: 14px;
+    height: 14px;
+}
+
+/* --- pinos (divIcon) --- */
+.pino-mapa {
+    display: block;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 3px solid var(--cor-fundo);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.pino-produtor { background: var(--cor-verde); }
+.pino-comprador { background: var(--cor-amber); }
+.pino-local { background: var(--cor-azul); }
+
+.pino-destacado {
+    box-shadow: 0 0 0 4px rgba(251, 191, 36, 0.35), 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+.pino-selecionado {
+    transform: scale(1.3);
+    border-color: #fff;
+}
+
+.leaflet-marker-icon:hover .pino-mapa,
+.leaflet-marker-icon:focus-visible .pino-mapa {
+    transform: scale(1.25);
+}
+
+/* tooltip e controle de camadas no tema escuro do site */
+.mapa-leaflet .leaflet-tooltip {
+    background: var(--cor-fundo2);
+    color: var(--cor-texto);
+    border: 1px solid var(--cor-verde-medio);
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    font-size: 12px;
+}
+
+.mapa-leaflet .leaflet-tooltip-top::before {
+    border-top-color: var(--cor-verde-medio);
+}
+
+.mapa-leaflet .leaflet-control-layers,
+.mapa-leaflet .leaflet-bar a {
+    background: var(--cor-fundo2);
+    color: var(--cor-texto);
+    border-color: var(--cor-borda);
+}
+
+.mapa-leaflet .leaflet-bar a:hover {
+    background: var(--cor-verde-escuro);
+    color: var(--cor-verde);
+}
+
+.mapa-leaflet .leaflet-control-attribution {
+    background: rgba(13, 20, 16, 0.75);
+    color: var(--cor-texto-fraco);
+}
+
+.mapa-leaflet .leaflet-control-attribution a { color: var(--cor-verde); }
+
+/* --- painel lateral --- */
+.painel-mapa {
+    background: rgba(13, 20, 16, 0.6);
+    border: 2px solid rgba(74, 222, 128, 0.2);
+    border-radius: 16px;
+    padding: 24px;
+    max-height: 600px;
+    overflow-y: auto;
+}
+
+.painel-mapa.ativo {
+    border-color: var(--cor-verde);
+    background: linear-gradient(135deg, rgba(74, 222, 128, 0.06) 0%, rgba(45, 90, 61, 0.1) 100%);
+}
+
+.painel-mapa.inativo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.7;
+}
+
+.mapa-vazio {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    text-align: center;
+    color: var(--cor-texto-fraco);
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+.mapa-vazio svg {
+    width: 56px;
+    height: 56px;
+    opacity: 0.35;
+}
+
+.etiqueta-tipo {
+    display: inline-block;
+    padding: 3px 12px;
+    border-radius: 100px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.etiqueta-produtor { background: rgba(74, 222, 128, 0.12); color: var(--cor-verde); }
+.etiqueta-comprador { background: rgba(251, 191, 36, 0.12); color: var(--cor-amber); }
+.etiqueta-local { background: rgba(96, 165, 250, 0.12); color: var(--cor-azul); }
+
+.painel-mapa h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.3rem;
+    color: #fff;
+}
+
+.local-ponto {
+    font-size: 13px;
+    color: var(--cor-texto-fraco);
+    margin-top: 4px;
+}
+
+.detalhe-ponto {
+    margin-top: 10px;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.bloco-painel {
+    margin-top: 20px;
+    padding-top: 18px;
+    border-top: 1px solid var(--cor-borda);
+}
+
+.subtitulo-painel {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--cor-texto-fraco);
+    margin-bottom: 12px;
+}
+
+.bloco-painel .subtitulo-painel:not(:first-child) {
+    margin-top: 18px;
+}
+
+/* --- clima --- */
+.clima-status {
+    font-size: 14px;
+    color: var(--cor-texto-fraco);
+}
+
+.clima-status.clima-erro { color: #f87171; }
+
+.clima-atual {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.icone-clima { font-size: 2.4rem; line-height: 1; }
+
+.temperatura-atual {
+    font-family: 'Fraunces', serif;
+    font-size: 2rem;
+    font-weight: 900;
+    color: #fff;
+    line-height: 1.1;
+}
+
+.descricao-tempo {
+    font-size: 13px;
+    color: var(--cor-texto-fraco);
+}
+
+.indicadores-clima {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    list-style: none;
+    margin-top: 14px;
+}
+
+.indicadores-clima li {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 8px 10px;
+    border-radius: 8px;
+    background: rgba(30, 51, 35, 0.35);
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.indicadores-clima span {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--cor-texto-fraco);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.previsao-dias {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.dia-previsao {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 10px 4px;
+    border-radius: 8px;
+    border: 1px solid var(--cor-borda);
+    font-size: 12px;
+    text-align: center;
+}
+
+.nome-dia { color: var(--cor-texto-fraco); text-transform: capitalize; }
+.icone-dia { font-size: 1.3rem; }
+.temperaturas-dia { font-weight: 700; }
+.temperaturas-dia small { color: var(--cor-texto-fraco); font-weight: 400; }
+.chuva-dia { color: var(--cor-azul); font-size: 11px; }
+
+.lista-alertas {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    list-style: none;
+}
+
+.alerta {
+    padding: 10px 12px;
+    border-radius: 8px;
+    border-left: 4px solid var(--cor-amber);
+    background: rgba(251, 191, 36, 0.08);
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.alerta strong { color: var(--cor-amber); }
+
+.alerta.alerta-alto {
+    border-left-color: #f87171;
+    background: rgba(248, 113, 113, 0.08);
+}
+
+.alerta.alerta-alto strong { color: #f87171; }
+
+.sem-alertas {
+    font-size: 13px;
+    color: var(--cor-verde);
+}
+
+/* --- lista de pontos dentro do raio --- */
+.lista-proximos {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    list-style: none;
+}
+
+.lista-proximos button {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 2px 12px;
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--cor-borda);
+    border-radius: 8px;
+    background: rgba(30, 51, 35, 0.25);
+    color: var(--cor-texto);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    text-align: left;
+    cursor: pointer;
+}
+
+.lista-proximos button:hover {
+    border-color: var(--cor-verde-medio);
+    background: rgba(30, 51, 35, 0.5);
+}
+
+.nome-proximo { font-size: 14px; font-weight: 600; }
+.distancia-proximo { font-size: 13px; font-weight: 700; color: var(--cor-verde); }
+.info-proximo { font-size: 12px; color: var(--cor-texto-fraco); grid-column: 1 / -1; }
+
+.sem-proximos {
+    font-size: 13px;
+    color: var(--cor-texto-fraco);
+    line-height: 1.5;
+}
+
+.nota-mapa {
+    margin-top: 16px;
+    text-align: center;
+    font-size: 12px;
+    color: var(--cor-texto-fraco);
+}
+
+@media (max-width: 1024px) {
+    #secao-mapa {
+        padding: 80px 40px;
+    }
+
+    .container-mapa {
+        grid-template-columns: 1fr;
+    }
+
+    .painel-mapa {
+        max-height: none;
+    }
+
+    .painel-mapa.inativo {
+        min-height: 160px;
+    }
+}
+
+@media (max-width: 768px) {
+    #secao-mapa {
+        padding: 60px 20px;
+    }
+
+    .barra-mapa {
+        padding: 18px;
+    }
+
+    .mapa-leaflet {
+        min-height: 400px;
+    }
+}
+
+@media (max-width: 480px) {
+    #secao-mapa {
+        padding: 40px 16px;
+    }
+
+    .busca-mapa .botao-mapa {
+        flex: 1;
+    }
+
+    .mapa-leaflet {
+        min-height: 340px;
+    }
+
+    .painel-mapa {
+        padding: 18px;
+    }
+
+    .previsao-dias {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}

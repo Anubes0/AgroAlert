@@ -6,6 +6,7 @@ const linksMenu = [
     { id: 'secao-hero', rotulo: 'Início' },
     { id: 'secao-como-funciona', rotulo: 'Como Funciona' },
     { id: 'secao-simulador-financeiro', rotulo: 'Simulador' },
+    { id: 'secao-mapa', rotulo: 'Mapa' },
     { id: 'secao-planos', rotulo: 'Planos' },
     { id: 'secao-impacto', rotulo: 'Impacto' },
     { id: 'secao-faq', rotulo: 'FAQ' },

@@ -133,6 +133,12 @@
 #btn-hamburguer.aberto span:nth-child(2) { opacity: 0; }
 #btn-hamburguer.aberto span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
+/* com 8 links no menu, aperta o espacamento antes de virar hamburguer */
+@media (max-width: 1150px) {
+    #navbar { padding: 0 24px; }
+    #menu-links { gap: 16px; }
+}
+
 @media (max-width: 900px) {
     #btn-navbar {
         display: none;

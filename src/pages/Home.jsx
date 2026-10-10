@@ -4,6 +4,7 @@ import ComoFunciona from '../components/ComoFunciona'
 import Planos from '../components/Planos'
 import Impacto from '../components/Impacto'
 import SimuladorFinanceiro from '../components/SimuladorFinanceiro'
+import MapaInterativo from '../components/MapaInterativo'
 import Faq from '../components/Faq'
 import Contato from '../components/Contato'
 import useAnimaScroll from '../hooks/useAnimaScroll'
@@ -25,6 +26,7 @@ function Home({ navegarPara }) {
             <Hero navegarPara={navegarPara} />
             <ComoFunciona navegarPara={navegarPara} />
             <SimuladorFinanceiro />
+            <MapaInterativo />
             <Planos onSelecionarPlano={aoSelecionarPlano} />
             <Impacto />
             <Faq />
