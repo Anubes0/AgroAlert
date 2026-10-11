@@ -1,7 +1,7 @@
 import './Hero.css'
 
 // TODO: substituir pelo link real do Pitch Vídeo da Fase 5 no YouTube
-const LINK_PITCH_VIDEO = 'https://www.youtube.com/watch?v=9MKe99kQe2E'
+const LINK_PITCH_VIDEO = 'https://youtu.be/Gt4CwDUw7zI'
 
 function Hero({ navegarPara }) {
     return (
