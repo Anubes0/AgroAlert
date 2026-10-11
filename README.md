@@ -1,4 +1,4 @@
-# AgroAlert — PBL Fase 5
+# AgroAlert — PBL Fase 6
 
 Plataforma digital (protótipo front-end) que conecta produtores rurais a compradores
 via WhatsApp, reduzindo desperdício e aumentando a renda no campo.
@@ -107,10 +107,8 @@ props/estado), CSS externo por componente (`import './Componente.css'`) e imagen
    manipulação direta de `style.display` via DOM.
 2. Os **15 `onclick` inline** do HTML viraram `onClick={}` nos componentes.
 
-## Pendências
+## Entrega da Fase 6
 
-- Gravar e publicar o **Pitch Vídeo** (até 3 min, só a funcionalidade nova + como o
-  React foi aplicado) e inserir o link na Home (`src/components/Hero.jsx`, constante
-  `LINK_PITCH_VIDEO`) e no PDF de entrega.
-- Montar o PDF (integrantes + link do PV + link do deploy) e o ZIP final, conforme a
-  "Forma de entrega" do enunciado.
+- Nova funcionalidade: **Mapa interativo** (seção acima).
+- Pitch Vídeo: https://youtu.be/Gt4CwDUw7zI (link também na Home, `src/components/Hero.jsx`).
+- Deploy: https://agroalert-delta.vercel.app
