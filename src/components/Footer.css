@@ -38,3 +38,48 @@
         padding: 32px;
     }
 }
+
+/* --- Fase 7: modo demonstracao (discreto) --- */
+.modo-demo {
+    margin-top: 8px;
+}
+
+.botao-demo {
+    background: transparent;
+    border: 1px dashed var(--cor-borda);
+    color: var(--cor-texto-fraco);
+    font: inherit;
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    opacity: 0.7;
+}
+
+.botao-demo:hover { opacity: 1; color: var(--cor-verde); border-color: var(--cor-verde); }
+
+.painel-demo {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.painel-demo label {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 11px;
+    color: var(--cor-texto-fraco);
+}
+
+.painel-demo select {
+    background: var(--cor-fundo2);
+    color: var(--cor-texto);
+    border: 1px solid var(--cor-borda);
+    border-radius: 6px;
+    padding: 5px 8px;
+    font: inherit;
+    font-size: 12px;
+}

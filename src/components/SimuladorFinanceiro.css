@@ -419,3 +419,20 @@
         font-size: 1.2rem;
     }
 }
+
+/* --- Fase 7: comparador com 3 cenarios --- */
+.resumo-financeiro.comparativo { grid-template-columns: repeat(3, 1fr); }
+.comparativo .valor-cartao { font-size: 1.25rem; }
+.detalhe-cartao { font-size: 11px; color: var(--cor-texto-fraco); line-height: 1.4; }
+.numero-item { font-size: 1.1rem; color: #06140c; width: 72px; height: 72px; }
+
+@media (max-width: 600px) {
+    .resumo-financeiro.comparativo { grid-template-columns: 1fr; }
+}
+
+/* Fase 7: evita overflow no mobile (inputs lado a lado tinham largura minima) */
+.container-simulador > * { min-width: 0; }
+.input-simulador { min-width: 0; width: 100%; }
+@media (max-width: 1024px) {
+    .container-simulador { grid-template-columns: minmax(0, 1fr); }
+}

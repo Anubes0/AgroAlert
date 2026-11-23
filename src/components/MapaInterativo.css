@@ -555,3 +555,10 @@
         grid-template-columns: repeat(2, 1fr);
     }
 }
+
+/* --- Fase 7: pontos de retirada e hubs (associacoes) --- */
+.pino-ponto { background: #c4b5fd; }
+.pino-hub { background: var(--cor-amber); border-radius: 4px !important; }
+.etiqueta-ponto { background: rgba(196, 181, 253, 0.12); color: #c4b5fd; }
+.etiqueta-hub { background: rgba(251, 191, 36, 0.12); color: var(--cor-amber); }
+.acao-painel-mapa { margin-top: 14px; display: flex; flex-wrap: wrap; gap: 10px; }

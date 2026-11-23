@@ -394,3 +394,15 @@
         justify-content: center;
     }
 }
+
+/* Fase 7: os botoes do hero viraram <Link> (ancoras) */
+#botoes-hero a { text-decoration: none; display: inline-flex; align-items: center; }
+
+/* Fase 7: correcao de overflow no mobile — a coluna "1fr" do grid crescia ate
+   a largura minima do conteudo (barra de confianca e numeros sem quebra) */
+#hero-conteudo-esq { min-width: 0; }
+
+@media (max-width: 900px) {
+    #secao-hero { grid-template-columns: minmax(0, 1fr); padding: 100px 20px 60px; }
+    #barra-confianca, #numeros-hero { flex-wrap: wrap; gap: 14px; }
+}
