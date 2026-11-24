@@ -406,3 +406,18 @@
     #secao-hero { grid-template-columns: minmax(0, 1fr); padding: 100px 20px 60px; }
     #barra-confianca, #numeros-hero { flex-wrap: wrap; gap: 14px; }
 }
+
+/* revisao: numeros e selos do hero sem espremer em telas medias */
+#numeros-hero {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+}
+.numero-stat .valor { white-space: nowrap; font-size: clamp(1.8rem, 3.2vw, 2.5rem); line-height: 1.1; }
+.numero-stat .label { display: block; margin-top: 4px; line-height: 1.4; }
+#barra-confianca { flex-wrap: wrap; gap: 10px 22px; }
+.item-confianca { white-space: nowrap; }
+
+@media (max-width: 480px) {
+    #numeros-hero { grid-template-columns: 1fr 1fr; }
+}

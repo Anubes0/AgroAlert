@@ -95,7 +95,7 @@
     transition: all 0.2s;
 }
 
-#btn-navbar { text-decoration: none; display: inline-block; }
+#btn-navbar { text-decoration: none; display: inline-block; white-space: nowrap; }
 
 #btn-navbar:hover {
     background: rgba(74, 222, 128, 0.08);
@@ -186,7 +186,11 @@
 @media (max-width: 1150px) {
     #navbar { padding: 0 24px; }
     #menu-links { gap: 16px; }
+    /* logado, o menu ganha a area do perfil: libera espaco para nao quebrar linha */
+    .rotulo-cesta, .nome-usuario { display: none; }
 }
+
+#menu-links a { white-space: nowrap; }
 
 @media (max-width: 900px) {
     .rotulo-cesta, .nome-usuario { display: none; }

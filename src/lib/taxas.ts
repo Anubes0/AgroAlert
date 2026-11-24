@@ -12,6 +12,13 @@ export const TAXAS = {
 
 export const COMISSAO_TOTAL = TAXAS.agroalert + TAXAS.associacao // 15%
 
+// metas do piloto (docs/modelo-negocio.md, Parte 3): o ponto de equilibrio
+// (custo fixo de R$ 1.500/mes ÷ margem de R$ 8,24 por pedido) da ~42 pedidos/semana
+export const META_PILOTO = {
+    pedidosEquilibrioSemana: 42,
+    produtores: 6,
+} as const
+
 export interface Repasse {
     bruto: number
     agroalert: number

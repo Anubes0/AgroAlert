@@ -25,7 +25,8 @@ npm run lint       # oxlint
 
 | Rota | O que faz | Conteúdo da Fase 7 |
 | --- | --- | --- |
-| `/` | Home: proposta de valor, ciclo semanal com **contagem regressiva** até o fechamento (qua 20h), **comparador de renda** (atravessador × por conta própria × AgroAlert), selos, planos, impacto calculado dos pedidos, FAQ, contato validado | Server + Client Components |
+| `/` | Home focada em quem compra: proposta de valor, ciclo semanal com **contagem regressiva** até o fechamento (qua 20h), **ofertas em destaque**, selos, **meta do piloto** com progresso calculado dos pedidos, FAQ, contato validado | Server + Client Components |
+| `/produtores` | Página de quem vende: **comparador de renda** (atravessador × por conta própria × AgroAlert), o que o painel faz, planos (produtor, ponto, indústria) e como entrar | Server Component com ilhas client |
 | `/ofertas` | **Vitrine** com busca, filtros (categoria, selo, classe, associação, produtor via `?produtor=`) e ordenação; esqueleto de carregamento e tela de erro com "tentar de novo" | `useEffect` + `fetch('/api/ofertas')`, `useSearchParams` |
 | `/ofertas/[id]` | Detalhe da oferta, perfil do produtor (selo, taxa de cumprimento, hub), prazo de reclamação, adicionar à cesta | Rota dinâmica, `useParams`, `notFound()` |
 | `/cesta` | Cesta, ponto de retirada, **assinatura −5%**, aceite da regra de não retirada, **Pix simulado** (QR) | Context + localStorage |
@@ -44,7 +45,8 @@ tempo após a retirada e restaura os dados de demonstração.
 
 ## Fluxo para testar (ou gravar o PV)
 
-1. **Entrar** como consumidor → **Ofertas** → filtrar "Feio mas bom" → adicionar itens.
+1. **Entrar** como consumidor (a conta *Marina Costa* já tem o pedido de exemplo AG-1907) →
+   **Ofertas** → filtrar "Feio mas bom" → adicionar itens.
 2. **Cesta** → escolher ponto → marcar assinatura → aceitar a regra → **Pagar com Pix** (simulado).
 3. Rodapé → **Modo demonstração** → fase *Colheita*. **Entrar** como produtor → **Painel** →
    *Alerta de clima* / *Romaneio* (registrar falta) / *Extrato*.
@@ -60,7 +62,7 @@ src/
 │   ├── layout.tsx            # layout raiz (Navbar, Footer, Providers)
 │   ├── page.tsx              # Home
 │   ├── ofertas/ · ofertas/[id]/ · cesta/ · pedidos/ · painel/ · ponto/
-│   ├── mapa/ · entrar/ · como-funciona/ · privacidade/ · not-found.tsx
+│   ├── produtores/ · mapa/ · entrar/ · como-funciona/ · privacidade/ · not-found.tsx
 │   └── api/ofertas/route.ts · api/mapa/route.ts
 ├── components/               # componentes + CSS co-localizado (herdado da F6)
 ├── context/                  # AuthContext, CicloContext, LojaContext
@@ -99,8 +101,10 @@ os dados ficam no navegador. Produtores, associações, pontos e ofertas são **
 
 ## Pendências da equipe
 
-- [ ] Fazer o deploy na Vercel e anotar o link.
-- [ ] Gravar o Pitch Vídeo (até 3 min — roteiro em `../docs/roteiro-pitch-video.md`), publicar no
-      YouTube como **público**, colar o link em `src/components/Hero.tsx` (`LINK_PITCH_VIDEO`) e
-      refazer o deploy.
-- [ ] Gerar o PDF + ZIP de entrega: `python ../docs/gerar_entrega.py --deploy <url> --video <url>`.
+- [x] Deploy na Vercel: https://agroalert-delta.vercel.app (o `vercel.json` fixa o framework Next.js,
+      porque o projeto na Vercel foi criado na Fase 6 com o preset Vite).
+- [x] Pitch Vídeo (roteiro em `../docs/roteiro-pitch-video.md`): https://youtu.be/WpODVyVU-9I —
+      link também na Home (`src/components/Hero.tsx`, `LINK_PITCH_VIDEO`).
+- [ ] Gerar o PDF + ZIP de entrega:
+      `python ../docs/gerar_entrega.py --deploy https://agroalert-delta.vercel.app --video https://youtu.be/WpODVyVU-9I`
+      e enviar só o ZIP no portal.

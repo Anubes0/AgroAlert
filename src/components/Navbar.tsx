@@ -11,11 +11,13 @@ import './Navbar.css'
 // Fase 7: a navegacao por estado (navegarPara) da Fase 5/6 deu lugar ao
 // roteamento do Next (App Router). <Link> troca de rota sem recarregar a
 // pagina e usePathname() diz qual link esta ativo.
+// o logo leva a Home; o menu agrupa por publico: quem compra (ofertas),
+// todos (como funciona, mapa) e quem vende (para produtores)
 const linksMenu = [
-    { href: '/', rotulo: 'Início' },
-    { href: '/ofertas', rotulo: 'Ofertas da semana' },
-    { href: '/mapa', rotulo: 'Mapa' },
+    { href: '/ofertas', rotulo: 'Ofertas' },
     { href: '/como-funciona', rotulo: 'Como funciona' },
+    { href: '/produtores', rotulo: 'Para produtores' },
+    { href: '/mapa', rotulo: 'Mapa' },
 ]
 
 const areaDoPerfil: Record<Perfil, { href: string; rotulo: string }> = {

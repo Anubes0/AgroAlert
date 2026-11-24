@@ -2,6 +2,7 @@
 
 import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from 'react'
 import usePersistente from '@/hooks/usePersistente'
+import { CONSUMIDOR_DEMO } from '@/data/catalogo'
 import { formatarQuantidade, gerarCodigo, gerarId } from '@/lib/pedidos'
 import { TAXAS } from '@/lib/taxas'
 import type { ItemCesta, ItemPedido, Oferta, Pedido, StatusPedido } from '@/types'
@@ -57,8 +58,9 @@ const LojaContext = createContext<LojaValor | null>(null)
 
 const agoraIso = () => new Date().toISOString()
 
-// pedidos de outros consumidores, para o painel do produtor e do ponto
-// ja terem um romaneio na demonstracao
+// pedidos de exemplo: um da conta de demonstracao (Meus pedidos nao comeca
+// vazio) e tres de outros consumidores, para o painel do produtor e do
+// ponto ja terem romaneio
 function pedidosDeExemplo(ofertas: Oferta[]): Pedido[] {
     const montarItem = (ofertaId: string, quantidade: number): ItemPedido | null => {
         const o = ofertas.find((of) => of.id === ofertaId)
@@ -75,6 +77,7 @@ function pedidosDeExemplo(ofertas: Oferta[]): Pedido[] {
         }
     }
     const exemplos: [string, string, string, [string, number][], boolean][] = [
+        ['AG-1907', CONSUMIDOR_DEMO, 'r1', [['o3', 1], ['o6', 1], ['o9', 2], ['o16', 1]], false],
         ['AG-2741', 'Carla Souza', 'r1', [['o1', 2], ['o4', 1.5], ['o10', 1], ['o13', 1]], true],
         ['AG-5318', 'Rafael Tavares', 'r2', [['o3', 2], ['o5', 2], ['o8', 1], ['o12', 1]], false],
         ['AG-8064', 'Juliana Prado', 'r1', [['o2', 1], ['o7', 2], ['o11', 2], ['o17', 1]], false],

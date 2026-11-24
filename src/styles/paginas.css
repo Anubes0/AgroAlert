@@ -585,3 +585,121 @@
     .card-pedido { grid-template-columns: 1fr; }
     .qr-box { justify-self: start; }
 }
+
+/* =============================================
+   REVISAO: Home por publico e pagina /produtores
+   ============================================= */
+
+/* ofertas em destaque na Home */
+#secao-destaques { padding: 100px 80px 40px; }
+.grade-destaques {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+    max-width: 1100px;
+    margin: 0 auto 36px;
+}
+.grade-destaques .esqueleto { min-height: 190px; }
+
+/* faixa de chamada (Home -> produtores, /produtores -> contato) */
+.faixa-produtor { padding: 40px 80px; }
+.faixa-cta {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 28px;
+    padding: 32px 36px;
+    border-radius: 18px;
+    border: 1px solid var(--cor-verde-medio);
+    background:
+        radial-gradient(circle at 0% 0%, rgba(74, 222, 128, 0.1), transparent 55%),
+        var(--cor-fundo2);
+}
+.faixa-cta .badge-secao { margin: 0 0 12px; }
+.faixa-cta h2,
+.faixa-cta h3 { font-family: 'Fraunces', serif; color: #fff; font-size: clamp(1.3rem, 2.6vw, 1.8rem); margin-bottom: 8px; }
+.faixa-cta p { color: var(--cor-texto-fraco); max-width: 560px; line-height: 1.6; }
+.faixa-cta .btn { white-space: nowrap; flex-shrink: 0; }
+
+/* /produtores */
+.hero-produtor .botoes-pagina { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 28px; }
+.numeros-produtor {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px 48px;
+    margin-top: 40px;
+}
+.numeros-produtor b { display: block; font-family: 'Fraunces', serif; font-size: 2.2rem; color: var(--cor-verde); }
+.numeros-produtor span { font-size: 13px; color: var(--cor-texto-fraco); }
+
+.secao-recursos { padding: 90px 80px; }
+.grade-recursos {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.recurso .icone-recurso { font-size: 28px; display: block; margin-bottom: 10px; }
+.recurso p { color: var(--cor-texto-fraco); font-size: 14px; line-height: 1.6; }
+
+.grade-passos-entrada {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+    max-width: 1100px;
+    margin: 0 auto 40px;
+}
+.grade-passos-entrada p { color: var(--cor-texto-fraco); font-size: 14px; line-height: 1.6; }
+.marcador-passo {
+    display: inline-grid;
+    place-items: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: var(--cor-verde);
+    color: #06140c;
+    font-weight: 800;
+    margin-bottom: 12px;
+}
+
+/* extrato do produtor: 6 cartoes em 2 linhas de 3 (antes sobrava 1 sozinho) */
+.numeros.numeros-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+/* vitrine: no celular os filtros ficam recolhidos atras de um botao */
+.alternar-filtros { display: none; margin-bottom: 14px; }
+
+@media (max-width: 1024px) {
+    .grade-recursos { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 900px) {
+    #secao-destaques { padding: 60px 20px 24px; }
+    .grade-destaques { grid-template-columns: minmax(0, 1fr); max-width: 480px; }
+    .faixa-produtor { padding: 24px 20px; }
+    .faixa-cta { flex-direction: column; align-items: flex-start; padding: 24px; }
+    .faixa-cta .btn { white-space: normal; }
+    .secao-recursos { padding: 60px 20px; }
+    .grade-passos-entrada { grid-template-columns: minmax(0, 1fr); }
+}
+
+@media (max-width: 640px) {
+    .grade-recursos { grid-template-columns: minmax(0, 1fr); }
+    .numeros.numeros-3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .alternar-filtros { display: inline-flex; }
+    .barra-filtros.recolhida { display: none; }
+    .barra-filtros .campo { flex: 1 1 140px; }
+    .barra-filtros .campo-crescer { flex-basis: 100%; }
+    .barra-filtros select { width: 100%; }
+}
+
+/* previsao de 4 dias no painel: 4 colunas, 2 no celular */
+.grade-previsao { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-top: 14px; }
+@media (max-width: 640px) {
+    .grade-previsao { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}

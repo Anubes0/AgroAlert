@@ -29,6 +29,8 @@ export default function Vitrine() {
     const [classe, setClasse] = useState<Classe | 'todas'>('todas')
     const [associacao, setAssociacao] = useState('todas')
     const [ordenacao, setOrdenacao] = useState<Ordenacao>('nome')
+    // so tem efeito no celular (CSS): os filtros ocupavam a tela inteira
+    const [filtrosAbertos, setFiltrosAbertos] = useState(false)
 
     const produtorFiltro = produtorDaUrl ? buscarProdutor(produtorDaUrl) : undefined
 
@@ -56,7 +58,8 @@ export default function Vitrine() {
         return [...filtradas].sort(comparar[ordenacao])
     }, [ofertas, busca, categoria, selo, classe, associacao, ordenacao, produtorFiltro, disponivel])
 
-    const temFiltro = busca || categoria !== 'todas' || selo !== 'todos' || classe !== 'todas' || associacao !== 'todas'
+    const filtrosAtivos = [busca, selo !== 'todos', classe !== 'todas', associacao !== 'todas'].filter(Boolean).length
+    const temFiltro = filtrosAtivos > 0 || categoria !== 'todas'
 
     function limparFiltros() {
         setBusca('')
@@ -85,7 +88,17 @@ export default function Vitrine() {
                 </p>
             )}
 
-            <div className="barra-filtros" role="search">
+            <button
+                type="button"
+                className="btn btn-secundario btn-pequeno alternar-filtros"
+                aria-expanded={filtrosAbertos}
+                aria-controls="barra-filtros"
+                onClick={() => setFiltrosAbertos((a) => !a)}
+            >
+                {filtrosAbertos ? 'Fechar filtros' : `Buscar e filtrar${filtrosAtivos ? ` (${filtrosAtivos})` : ''}`}
+            </button>
+
+            <div id="barra-filtros" className={`barra-filtros ${filtrosAbertos ? '' : 'recolhida'}`} role="search">
                 <label className="campo campo-crescer">
                     Buscar
                     <input type="search" placeholder="Produto, sítio ou cidade" value={busca} onChange={(e) => setBusca(e.target.value)} />

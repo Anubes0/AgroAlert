@@ -35,7 +35,7 @@ export default function AlertaClimaProdutor({
     }, [produtor.lat, produtor.lng, tentativa])
 
     if (estado.status === 'carregando') {
-        return <div className="caixa"><p className="texto-fraco">Consultando a previsão para {produtor.cidade} na Open-Meteo...</p></div>
+        return <div className="caixa"><p className="texto-fraco">Consultando a previsão do tempo para {produtor.cidade}...</p></div>
     }
 
     if (estado.status === 'erro') {
@@ -62,7 +62,7 @@ export default function AlertaClimaProdutor({
                     Agora: {atual.icone} {Math.round(clima.atual.temperatura)}°C, {atual.texto.toLowerCase()} · umidade {clima.atual.umidade}% · vento{' '}
                     {Math.round(clima.atual.vento)} km/h
                 </p>
-                <div className="grade-3" style={{ gridTemplateColumns: 'repeat(4, minmax(0, 1fr))', marginTop: 14 }}>
+                <div className="grade-previsao">
                     {clima.previsao.map((dia) => {
                         const tempo = descreverTempo(dia.codigo)
                         return (

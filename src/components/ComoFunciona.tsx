@@ -18,7 +18,7 @@ const passos = [
     {
         numero: '02',
         titulo: 'Até quarta 20h: encomenda',
-        texto: 'Você monta a cesta, escolhe o ponto de retirada e paga via Pix. O valor fica retido até você retirar — como no Mercado Livre.',
+        texto: 'Você monta a cesta, escolhe o ponto de retirada e paga via Pix. O valor fica protegido até você retirar o pedido.',
         icone: (
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <circle cx="9" cy="21" r="1" />
@@ -30,7 +30,7 @@ const passos = [
     {
         numero: '03',
         titulo: 'Quinta e sexta: colheita',
-        texto: 'O produtor recebe o romaneio e colhe só o que foi vendido. A rota compartilhada recolhe as caixas na associação.',
+        texto: 'Cada produtor recebe a lista do que colher e para quem. No sábado cedo, uma rota compartilhada leva as caixas da associação aos pontos.',
         icone: (
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <rect x="1" y="3" width="15" height="13" />
@@ -43,7 +43,7 @@ const passos = [
     {
         numero: '04',
         titulo: 'Sábado: retirada com QR',
-        texto: 'Retire das 9h às 13h no ponto escolhido. O QR confirma a retirada e o pagamento é liberado ao produtor.',
+        texto: 'Retire das 9h às 13h no ponto escolhido mostrando o QR. O produtor recebe depois que você confirma que está tudo certo.',
         icone: (
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <rect x="3" y="3" width="7" height="7" />
@@ -60,7 +60,7 @@ export default function ComoFunciona() {
         <section id="secao-como-funciona">
             <div className="titulo-secao anima-scroll">
                 <p className="badge-secao">Ciclo semanal</p>
-                <h2>Como Funciona</h2>
+                <h2>Como funciona</h2>
                 <p>Colher só o que já foi vendido: é assim que a colheita não vira perda</p>
             </div>
 

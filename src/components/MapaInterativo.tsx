@@ -96,7 +96,7 @@ function criarIcone(tipo: TipoMarcador, destacado: boolean, selecionado: boolean
 }
 
 function ResumoClima({ clima }: { clima: EstadoClima }) {
-    if (clima.status === 'carregando') return <p className="clima-status">Consultando a previsão na Open-Meteo...</p>
+    if (clima.status === 'carregando') return <p className="clima-status">Consultando a previsão do tempo...</p>
     if (clima.status === 'erro') return <p className="clima-status clima-erro">Não foi possível carregar o clima agora.</p>
     if (clima.status !== 'ok') return null
 
@@ -491,7 +491,7 @@ export default function MapaInterativo() {
                 </aside>
             </div>
 
-            <p className="nota-mapa">Dados fictícios do piloto. Mapa: OpenStreetMap via Leaflet · Busca: Nominatim · Clima: Open-Meteo.</p>
+            <p className="nota-mapa">Mapa © OpenStreetMap · busca de endereços: Nominatim · previsão do tempo: Open-Meteo</p>
         </section>
     )
 }

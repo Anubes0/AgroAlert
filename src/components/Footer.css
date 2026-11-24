@@ -15,10 +15,18 @@
     color: var(--cor-texto-fraco);
 }
 
+#rodape-site {
+    flex-wrap: wrap;
+    gap: 20px 40px;
+}
+
 #rodape-site .links-rodape {
     display: flex;
-    gap: 20px;
+    flex-wrap: wrap;
+    gap: 10px 20px;
 }
+
+#rodape-site .links-rodape a { white-space: nowrap; }
 
 #rodape-site .links-rodape a {
     font-size: 13px;

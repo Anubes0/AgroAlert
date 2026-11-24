@@ -96,6 +96,10 @@ export const produtores: Produtor[] = [
     },
 ]
 
+// conta de consumidor sugerida no login simulado; ja tem um pedido de
+// exemplo para a demonstracao do QR nao depender de uma compra antes
+export const CONSUMIDOR_DEMO = 'Marina Costa'
+
 export const pontos: PontoRetirada[] = [
     {
         id: 'r1',

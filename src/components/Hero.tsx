@@ -2,9 +2,8 @@ import Link from 'next/link'
 import { COMISSAO_TOTAL, TAXAS } from '@/lib/taxas'
 import './Hero.css'
 
-// TODO (equipe): colar aqui o link PUBLICO do Pitch Video da Fase 7 no YouTube
-// e fazer o deploy de novo (o enunciado exige o link na Home)
-export const LINK_PITCH_VIDEO = ''
+// link publico do Pitch Video da Fase 7 no YouTube (o enunciado exige o link na Home)
+export const LINK_PITCH_VIDEO = 'https://youtu.be/WpODVyVU-9I'
 
 export default function Hero() {
     return (
@@ -32,7 +31,7 @@ export default function Hero() {
 
                 <div id="botoes-hero">
                     <Link className="btn-verde" href="/ofertas">Ver ofertas da semana ◉</Link>
-                    <Link className="btn-fantasma" href="/entrar?perfil=produtor">Sou produtor ◉</Link>
+                    <Link className="btn-fantasma" href="/produtores">Sou produtor ◉</Link>
                 </div>
 
                 {LINK_PITCH_VIDEO ? (
@@ -44,16 +43,16 @@ export default function Hero() {
                 )}
 
                 <ul id="barra-confianca">
-                    <li className="item-confianca">Produtor entra grátis</li>
+                    <li className="item-confianca">Retirada perto de casa</li>
                     <li className="item-confianca">Pagamento protegido</li>
                     <li className="item-confianca">Selo de procedência</li>
-                    <li className="item-confianca">Alerta de clima</li>
+                    <li className="item-confianca">Estorno automático de falta</li>
                 </ul>
 
                 <div id="numeros-hero">
                     <div className="numero-stat">
-                        <div className="valor">{Math.round(COMISSAO_TOTAL * 100)}%</div>
-                        <div className="label">só quando o produtor vende — sem mensalidade</div>
+                        <div className="valor">{100 - Math.round(COMISSAO_TOTAL * 100)}%</div>
+                        <div className="label">do valor dos produtos vai para quem plantou</div>
                     </div>
                     <div className="numero-stat">
                         <div className="valor">R$ {TAXAS.taxaRetirada}</div>
@@ -61,7 +60,7 @@ export default function Hero() {
                     </div>
                     <div className="numero-stat">
                         <div className="valor">~2×</div>
-                        <div className="label">o que o atravessador paga ao produtor</div>
+                        <div className="label">o que o produtor receberia do atravessador</div>
                     </div>
                 </div>
             </div>

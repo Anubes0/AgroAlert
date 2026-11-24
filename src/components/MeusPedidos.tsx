@@ -13,7 +13,10 @@ export default function MeusPedidos() {
     const agora = useAgora()
     const novo = useSearchParams().get('novo')
 
-    const meus = pedidos.filter((p) => p.consumidor === usuario?.nome)
+    // sem back-end, o pedido e ligado ao consumidor pelo nome; normaliza
+    // espacos e maiusculas ("marina  costa" = "Marina Costa")
+    const normalizar = (nome = '') => nome.trim().replace(/\s+/g, ' ').toLocaleLowerCase('pt-BR')
+    const meus = pedidos.filter((p) => normalizar(p.consumidor) === normalizar(usuario?.nome))
 
     return (
         <div className="pagina-app">

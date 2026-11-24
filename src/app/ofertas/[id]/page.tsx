@@ -97,7 +97,7 @@ export default function DetalheOferta() {
                         <ul className="texto-fraco" style={{ paddingLeft: 18, display: 'grid', gap: 6 }}>
                             <li>Você paga agora via Pix e o valor fica <strong>retido</strong> até a retirada.</li>
                             <li>Se faltar produto na colheita, o valor do item é <strong>estornado</strong> automaticamente.</li>
-                            <li>Depois de retirar, você tem <strong>{prazo}h</strong> para reclamar deste item ({prazo === 24 ? 'alta perecibilidade' : 'frutas, legumes e raízes'}).</li>
+                            <li>Depois de retirar, você tem <strong>{prazo}h</strong> para reclamar deste item ({prazo === 24 ? 'folhosas e ervas murcham rápido' : 'frutas, legumes e raízes'}).</li>
                             <li>Do valor do produto, {moeda(calcularRepasse(oferta.preco).produtor)} por {oferta.unidade} vão direto para o produtor (85%).</li>
                         </ul>
                     </div>

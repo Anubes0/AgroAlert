@@ -64,7 +64,7 @@ export default function SimuladorFinanceiro() {
         <section id="secao-simulador-financeiro">
             <div className="titulo-secao anima-scroll">
                 <p className="badge-secao">Simulação Interativa</p>
-                <h2>Comparador de Renda do Produtor</h2>
+                <h2>Comparador de renda do produtor</h2>
                 <p>Atravessador, venda por conta própria ou AgroAlert: quanto sobra no seu bolso?</p>
             </div>
 
@@ -127,7 +127,7 @@ export default function SimuladorFinanceiro() {
                                 </div>
                                 <div className="seta-fluxo">↓</div>
                                 <div className="etapa-fluxo etapa-final">
-                                    <div className="label-etapa">Você recebe (liberado após a retirada)</div>
+                                    <div className="label-etapa">Você recebe (liberado após a retirada confirmada)</div>
                                     <div className="valor-etapa valor-lucro">{moeda(repasse.produtor)}</div>
                                     <div className="margem-lucro">
                                         {ganhoSobreAtravessador > 0
@@ -149,7 +149,7 @@ export default function SimuladorFinanceiro() {
 
                             <div className="dica-resultado">
                                 <p>
-                                    💡 <strong>Por que não vender por fora?</strong> Sozinho você economiza os 15%, mas paga cada
+                                    💡 <strong>E se eu vender por conta própria?</strong> Sozinho você economiza os 15%, mas paga cada
                                     entrega, cobra cada cliente e corre o risco de calote. No AgroAlert é uma entrega só no hub e o
                                     pagamento já está garantido.
                                 </p>

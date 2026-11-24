@@ -46,8 +46,8 @@ export default function Impacto() {
 
             <div className="titulo-secao anima-scroll">
                 <p className="badge-secao">Por que importa</p>
-                <h2>Nosso Impacto</h2>
-                <p>Números do ciclo atual deste protótipo, calculados a partir dos pedidos</p>
+                <h2>Nosso impacto</h2>
+                <p>Quanto falta para a meta do piloto e o que este ciclo já rendeu para quem planta</p>
             </div>
 
             <ImpactoAoVivo />

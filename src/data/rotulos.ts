@@ -20,12 +20,12 @@ export const SELOS: Record<Selo, { rotulo: string; curto: string; descricao: str
     certificado: {
         rotulo: 'Orgânico certificado',
         curto: 'Orgânico',
-        descricao: 'Certificação por auditoria ou SPG, conferida no Cadastro Nacional de Produtores Orgânicos (MAPA).',
+        descricao: 'Certificado por auditoria ou por um Sistema Participativo de Garantia (SPG) e registrado no Cadastro Nacional de Produtores Orgânicos, do Ministério da Agricultura.',
     },
     ocs: {
         rotulo: 'Orgânico — venda direta (OCS)',
         curto: 'Orgânico OCS',
-        descricao: 'Agricultor familiar vinculado a uma Organização de Controle Social, conferido no cadastro do MAPA. Pode vender direto ao consumidor sem selo de certificadora.',
+        descricao: 'Agricultor familiar ligado a uma Organização de Controle Social (OCS), registrado no Ministério da Agricultura. Pode vender direto ao consumidor sem selo de certificadora.',
     },
     transicao: {
         rotulo: 'Em transição agroecológica',

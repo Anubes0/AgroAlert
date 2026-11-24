@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { QRCodeSVG } from 'qrcode.react'
 import { useAuth } from '@/context/AuthContext'
 import { useCiclo } from '@/context/CicloContext'
@@ -12,6 +12,7 @@ import { ROTULO_TIPO_PONTO } from '@/data/rotulos'
 import { calcularRepasse, moeda, TAXAS } from '@/lib/taxas'
 import FaixaCiclo from '@/components/FaixaCiclo'
 import SeletorQuantidade, { passoDa } from '@/components/SeletorQuantidade'
+import { formatarQuantidade } from '@/lib/pedidos'
 
 export default function CestaPagina() {
     const router = useRouter()
@@ -23,11 +24,25 @@ export default function CestaPagina() {
     const [aceite, setAceite] = useState(false)
     const [pixAberto, setPixAberto] = useState(false)
     const [tentouPagar, setTentouPagar] = useState(false)
+    const [erroPedido, setErroPedido] = useState('')
+
+    // Esc fecha o modal do Pix (teclado / leitor de tela)
+    useEffect(() => {
+        if (!pixAberto) return
+        const aoTeclar = (e: KeyboardEvent) => {
+            if (e.key === 'Escape') setPixAberto(false)
+        }
+        window.addEventListener('keydown', aoTeclar)
+        return () => window.removeEventListener('keydown', aoTeclar)
+    }, [pixAberto])
 
     // junta cada item da cesta com a oferta correspondente (descarta removidas)
     const linhas = cesta
         .map((item) => ({ item, oferta: ofertas.find((o) => o.id === item.ofertaId) }))
         .filter((l): l is { item: typeof l.item; oferta: NonNullable<typeof l.oferta> } => Boolean(l.oferta))
+
+    // a oferta pode ter sido reduzida ou esgotada depois de ir para a cesta
+    const acimaDoDisponivel = linhas.filter((l) => l.item.quantidade > disponivel(l.oferta.id))
 
     const subtotal = linhas.reduce((s, l) => s + l.item.quantidade * l.oferta.preco, 0)
     const desconto = assinatura ? subtotal * TAXAS.descontoAssinatura : 0
@@ -38,6 +53,7 @@ export default function CestaPagina() {
     const erros: string[] = []
     if (!pontoPreferido) erros.push('Escolha o ponto de retirada.')
     if (!aceite) erros.push('Aceite a regra de retirada para continuar.')
+    if (acimaDoDisponivel.length) erros.push('Ajuste as quantidades marcadas: passam do que ainda está disponível.')
 
     function pagar() {
         setTentouPagar(true)
@@ -49,7 +65,12 @@ export default function CestaPagina() {
         if (!usuario || !pontoPreferido) return
         const pedido = criarPedido({ consumidor: usuario.nome, pontoId: pontoPreferido, assinatura })
         setPixAberto(false)
-        if (pedido) router.push(`/pedidos?novo=${pedido.codigo}`)
+        if (!pedido) {
+            // antes o modal so fechava, sem explicar nada
+            setErroPedido('Os itens da cesta esgotaram antes do pagamento. Nenhum valor foi cobrado.')
+            return
+        }
+        router.push(`/pedidos?novo=${pedido.codigo}`)
     }
 
     if (!pronto) {
@@ -103,6 +124,11 @@ export default function CestaPagina() {
                                                         minimo={passoDa(oferta.unidade)}
                                                         aoMudar={(q) => alterarQuantidade(oferta.id, q)}
                                                     />
+                                                    {item.quantidade > disponivel(oferta.id) && (
+                                                        <div className="texto-pequeno destaque-amber">
+                                                            Só {formatarQuantidade(disponivel(oferta.id), oferta.unidade)} disponíveis
+                                                        </div>
+                                                    )}
                                                 </td>
                                                 <td className="num">{moeda(item.quantidade * oferta.preco)}</td>
                                                 <td>
@@ -168,6 +194,8 @@ export default function CestaPagina() {
                             </span>
                         </label>
 
+                        {erroPedido && <p className="aviso aviso-alto" role="alert" style={{ marginBottom: 14 }}>{erroPedido}</p>}
+
                         {tentouPagar && erros.length > 0 && (
                             <ul className="aviso aviso-alto" role="alert" style={{ listStyle: 'none', marginBottom: 14 }}>
                                 {erros.map((e) => <li key={e}>{e}</li>)}
@@ -193,7 +221,7 @@ export default function CestaPagina() {
                 <div className="fundo-modal" role="dialog" aria-modal="true" aria-labelledby="titulo-pix" onClick={() => setPixAberto(false)}>
                     <div className="modal" onClick={(e) => e.stopPropagation()}>
                         <h2 id="titulo-pix">Pagamento via Pix</h2>
-                        <p className="texto-fraco">Pagamento <strong>simulado</strong> (protótipo). Num sistema real, o intermediador com custódia geraria este QR.</p>
+                        <p className="texto-fraco">Pagamento <strong>simulado</strong>: no serviço real, este QR viria do intermediador de pagamento.</p>
                         <div className="qr-box">
                             <QRCodeSVG value={`PIX-SIMULADO|AgroAlert|${pontoPreferido}|${total.toFixed(2)}`} size={170} />
                             <p>{moeda(total)}</p>

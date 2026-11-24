@@ -62,8 +62,12 @@ export default function Contato() {
                 const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
                 return regex.test(valores.email.trim()) ? '' : 'E-mail inválido'
             }
-            case 'telefone':
-                return valores.telefone.trim().length >= 10 ? '' : 'Telefone obrigatório'
+            case 'telefone': {
+                // conta so os digitos: a mascara "(11) 9" ja tinha 6 caracteres
+                const digitos = valores.telefone.replace(/\D/g, '').length
+                if (digitos === 0) return 'Telefone obrigatório'
+                return digitos >= 10 ? '' : 'Telefone incompleto: informe DDD + número'
+            }
             case 'mensagem': {
                 const tamanho = valores.mensagem.trim().length
                 return tamanho >= 15 && tamanho <= 500 ? '' : 'A mensagem deve ter entre 15 e 500 caracteres'
@@ -113,8 +117,8 @@ export default function Contato() {
 
             <div className="titulo-secao anima-scroll">
                 <p className="badge-secao">Fale Conosco</p>
-                <h2>Entre em Contato</h2>
-                <p>Quer ser produtor, ponto de retirada ou comprar lotes para indústria? Fala com a gente!</p>
+                <h2>Entre em contato</h2>
+                <p>Quer vender, ser ponto de retirada ou comprar lotes para a indústria? Fale com a gente.</p>
             </div>
 
             <div id="container-contato" className="anima-scroll">

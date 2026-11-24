@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { useAuth } from '@/context/AuthContext'
 import { useCiclo } from '@/context/CicloContext'
 import { useLoja } from '@/context/LojaContext'
@@ -22,7 +22,7 @@ type Aba = 'ofertas' | 'clima' | 'romaneio' | 'extrato'
 const ABAS: { id: Aba; rotulo: string }[] = [
     { id: 'ofertas', rotulo: 'Ofertas da semana' },
     { id: 'clima', rotulo: 'Alerta de clima' },
-    { id: 'romaneio', rotulo: 'Romaneio' },
+    { id: 'romaneio', rotulo: 'Administração' },
     { id: 'extrato', rotulo: 'Extrato' },
 ]
 
@@ -39,6 +39,11 @@ export default function PainelProdutor() {
     const [form, setForm] = useState<EstadoForm>({ modo: 'fechado' })
     const [faltas, setFaltas] = useState<Record<string, string>>({})
     const [mensagem, setMensagem] = useState('')
+    // um aviso novo cancela o timer do anterior (antes o 1o timer apagava o 2o aviso)
+    const timerAviso = useRef<ReturnType<typeof setTimeout> | null>(null)
+    useEffect(() => () => {
+        if (timerAviso.current) clearTimeout(timerAviso.current)
+    }, [])
 
     const produtor = buscarProdutor(usuario?.produtorId ?? '')
     const minhasOfertas = useMemo(() => ofertas.filter((o) => o.produtorId === produtor?.id), [ofertas, produtor])
@@ -65,8 +70,9 @@ export default function PainelProdutor() {
     }
 
     function avisar(texto: string) {
+        if (timerAviso.current) clearTimeout(timerAviso.current)
         setMensagem(texto)
-        setTimeout(() => setMensagem(''), 3500)
+        timerAviso.current = setTimeout(() => setMensagem(''), 3500)
     }
 
     function aoSalvar(oferta: Oferta) {
@@ -77,7 +83,7 @@ export default function PainelProdutor() {
 
     function aoRemover(oferta: Oferta) {
         if (vendidoDe(oferta.id) > 0) {
-            avisar('Esta oferta já tem pedidos neste ciclo e não pode ser excluída. Reduza a quantidade ou registre falta no romaneio.')
+            avisar('Esta oferta já tem pedidos neste ciclo e não pode ser excluída. Reduza a quantidade ou registre a falta na aba Administração.')
             return
         }
         if (!window.confirm(`Excluir a oferta "${oferta.produto}"?`)) return
@@ -90,8 +96,10 @@ export default function PainelProdutor() {
         setAba('ofertas')
         if (acao === 'antecipar') {
             setForm({ modo: 'novo', sugestao: { colheita: 'antecipada', categoria: 'folhosas', descricao: 'Colheita antecipada por alerta de clima.' } })
-        } else {
+        } else if (acao === 'reduzir') {
             avisar('Revise as quantidades: clique em "Editar" nas ofertas mais expostas ao clima.')
+        } else {
+            avisar('Manejo: cubra as folhosas, reforce estacas e escoe a água dos canteiros. Se houver perda, registre a falta na aba Administração.')
         }
     }
 
@@ -259,10 +267,16 @@ export default function PainelProdutor() {
                                                                         className="btn btn-perigo btn-pequeno"
                                                                         onClick={() => {
                                                                             const qtd = parseFloat((faltas[chave] ?? '').replace(',', '.'))
-                                                                            if (qtd > 0) {
-                                                                                marcarFalta(pedido.id, item.ofertaId, qtd)
-                                                                                avisar(`Falta registrada no pedido ${pedido.codigo}: o consumidor foi estornado.`)
+                                                                            if (!(qtd > 0)) {
+                                                                                avisar('Informe quanto faltou (um número maior que zero).')
+                                                                                return
                                                                             }
+                                                                            marcarFalta(pedido.id, item.ofertaId, qtd)
+                                                                            avisar(
+                                                                                qtd > item.quantidade
+                                                                                    ? `Falta limitada a ${formatarQuantidade(item.quantidade, item.unidade)} (o total do pedido ${pedido.codigo}). Consumidor estornado.`
+                                                                                    : `Falta registrada no pedido ${pedido.codigo}: o consumidor foi estornado.`
+                                                                            )
                                                                         }}
                                                                     >
                                                                         Registrar falta
@@ -286,8 +300,8 @@ export default function PainelProdutor() {
 
             {aba === 'extrato' && (
                 <>
-                    <div className="numeros">
-                        <div className="numero"><span>Vendido (entregue)</span><b>{moeda(brutoTotal)}</b></div>
+                    <div className="numeros numeros-3">
+                        <div className="numero"><span>Vendido no ciclo</span><b>{moeda(brutoTotal)}</b></div>
                         <div className="numero"><span>Comissão AgroAlert ({Math.round(TAXAS.agroalert * 100)}%)</span><b>− {moeda(repasseTotal.agroalert)}</b></div>
                         <div className="numero"><span>Associação ({Math.round(TAXAS.associacao * 100)}%)</span><b>− {moeda(repasseTotal.associacao)}</b></div>
                         <div className="numero verde"><span>Seu líquido (85%)</span><b>{moeda(repasseTotal.produtor)}</b></div>

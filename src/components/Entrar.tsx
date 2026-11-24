@@ -3,12 +3,12 @@
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useState, type FormEvent } from 'react'
 import { useAuth } from '@/context/AuthContext'
-import { pontos, produtores } from '@/data/catalogo'
+import { CONSUMIDOR_DEMO, pontos, produtores } from '@/data/catalogo'
 import type { Perfil } from '@/types'
 
 const PERFIS: { id: Perfil; emoji: string; titulo: string; texto: string; destino: string }[] = [
     { id: 'consumidor', emoji: '🧺', titulo: 'Consumidor', texto: 'Encomendar hortifrúti natural e retirar no sábado.', destino: '/ofertas' },
-    { id: 'produtor', emoji: '🌱', titulo: 'Produtor', texto: 'Publicar ofertas, ver romaneio, clima e extrato.', destino: '/painel' },
+    { id: 'produtor', emoji: '🌱', titulo: 'Produtor', texto: 'Publicar ofertas, administrar a colheita, ver clima e extrato.', destino: '/painel' },
     { id: 'ponto', emoji: '🏪', titulo: 'Ponto de retirada', texto: 'Registrar recebimento e retirada (QR).', destino: '/ponto' },
 ]
 
@@ -27,7 +27,7 @@ export default function Entrar() {
     const volta = parametros.get('volta')
 
     const [perfil, setPerfil] = useState<Perfil>(perfilValido(perfilInicial) ? perfilInicial : 'consumidor')
-    const [nome, setNome] = useState('Marina Costa')
+    const [nome, setNome] = useState(CONSUMIDOR_DEMO)
     const [produtorId, setProdutorId] = useState(produtores[0].id)
     const [pontoId, setPontoId] = useState(pontos[0].id)
     const [erro, setErro] = useState('')
@@ -92,6 +92,7 @@ export default function Entrar() {
                             Seu nome e sobrenome
                             <input value={nome} onChange={(e) => { setNome(e.target.value); setErro('') }} autoComplete="name" aria-invalid={Boolean(erro)} />
                             {erro && <span className="erro-campo">{erro}</span>}
+                            <span className="dica-campo">A conta {CONSUMIDOR_DEMO} já tem um pedido de exemplo (AG-1907) para testar o QR.</span>
                         </label>
                     )}
                     {perfil === 'produtor' && (

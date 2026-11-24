@@ -47,7 +47,7 @@ export default function Privacidade() {
                             </tr>
                             <tr>
                                 <td>Localização</td>
-                                <td>Cidade, endereço ou coordenadas (lat/lng)</td>
+                                <td>Cidade, endereço ou coordenadas (latitude e longitude)</td>
                                 <td>Sugerir o ponto de retirada mais próximo e montar a rota de coleta</td>
                             </tr>
                             <tr>
@@ -112,12 +112,12 @@ export default function Privacidade() {
                     <p>Este protótipo não utiliza cookies de rastreamento publicitário. Eventuais cookies servem apenas ao funcionamento básico do site.</p>
 
                     <h2 id="termos">12. Termos de uso (resumo)</h2>
-                    <p>Ao usar o AgroAlert você concorda em fornecer informações verdadeiras nos anúncios, utilizar a plataforma de forma lícita e respeitar os demais usuários. Compra, pagamento e conversa acontecem dentro da plataforma. O pagamento fica retido por um intermediador e só é repassado ao produtor após a retirada confirmada (ou automaticamente após 24h para folhosas e ervas e 48h para os demais itens, sem reclamação). Itens que faltarem na colheita são estornados. Pedidos não retirados até as 13h de sábado são doados, sem reembolso, e o produtor recebe normalmente. Não há mensalidade nem fidelidade.</p>
+                    <p>Ao usar o AgroAlert você concorda em fornecer informações verdadeiras nas ofertas e no cadastro, utilizar a plataforma de forma lícita e respeitar os demais usuários. Compra, pagamento e conversa acontecem dentro da plataforma. O pagamento fica retido por um intermediador e só é repassado ao produtor após a retirada confirmada (ou automaticamente após 24h para folhosas e ervas e 48h para os demais itens, sem reclamação). Itens que faltarem na colheita são estornados. Pedidos não retirados até as 13h de sábado são doados, sem reembolso, e o produtor recebe normalmente. Não há mensalidade nem fidelidade.</p>
 
                     <h2>13. Alterações desta política</h2>
                     <p>Esta política pode ser atualizada para refletir melhorias no serviço ou mudanças legais. A versão vigente estará sempre disponível nesta página.</p>
 
-                    <p className="meta-doc">Última atualização: novembro de 2026 · Versão 2.0 (modelo de ciclo semanal)</p>
+                    <p className="meta-doc">Última atualização: novembro de 2026 · Versão 2.0</p>
 
                 </div>
 

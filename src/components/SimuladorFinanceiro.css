@@ -343,8 +343,7 @@
     }
 
     .container-simulador {
-        grid-template-columns: 1fr;
-        gap: 40px;
+        gap: 24px;
     }
 
     .grade-explicacao {
@@ -433,6 +432,11 @@
 /* Fase 7: evita overflow no mobile (inputs lado a lado tinham largura minima) */
 .container-simulador > * { min-width: 0; }
 .input-simulador { min-width: 0; width: 100%; }
-@media (max-width: 1024px) {
-    .container-simulador { grid-template-columns: minmax(0, 1fr); }
+@media (max-width: 860px) {
+    .container-simulador { grid-template-columns: minmax(0, 1fr); gap: 32px; }
+}
+/* revisao: o painel de resultado acompanha a rolagem enquanto se edita */
+@media (min-width: 861px) {
+    .container-simulador { align-items: start; }
+    .painel-resultado { position: sticky; top: 90px; }
 }

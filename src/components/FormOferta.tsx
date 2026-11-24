@@ -116,9 +116,10 @@ export default function FormOferta({ produtorId, inicial, vendido = 0, aoSalvar,
                 </label>
                 <label className="campo">
                     Unidade
-                    <select value={campos.unidade} onChange={(e) => mudar('unidade', e.target.value as Unidade)}>
+                    <select value={campos.unidade} disabled={vendido > 0} onChange={(e) => mudar('unidade', e.target.value as Unidade)}>
                         {UNIDADES.map((u) => <option key={u} value={u}>{u}</option>)}
                     </select>
+                    {vendido > 0 && <span className="dica-campo">Já há vendas neste ciclo: a unidade não pode mudar.</span>}
                 </label>
                 <label className="campo">
                     Quantidade máxima que espera colher *

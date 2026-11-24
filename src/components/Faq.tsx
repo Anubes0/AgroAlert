@@ -38,7 +38,7 @@ export default function Faq() {
         <section id="secao-faq">
             <div className="titulo-secao anima-scroll">
                 <p className="badge-secao">Dúvidas</p>
-                <h2>Perguntas Frequentes</h2>
+                <h2>Perguntas frequentes</h2>
                 <p>O que consumidores e produtores mais perguntam antes de começar</p>
             </div>
 

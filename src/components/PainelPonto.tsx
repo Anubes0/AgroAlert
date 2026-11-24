@@ -118,7 +118,7 @@ export default function PainelPonto() {
                     )}
                     {cicloAberto && (
                         <p className="aviso aviso-atencao" style={{ marginTop: 16 }}>
-                            Pedidos ainda abertos. Para demonstrar o sábado, use o “Modo demonstração” no rodapé e escolha a fase de retirada.
+                            Os pedidos ainda estão abertos: as caixas chegam no sábado, das 9h às 13h. Para testar agora, escolha a fase de retirada no Modo demonstração, no rodapé.
                         </p>
                     )}
                 </div>

@@ -64,7 +64,7 @@ const planos = [
         nome: 'Indústria',
         descricao: 'Polpas, molhos e conservas',
         preco: `${Math.round(TAXAS.industria * 100)}%`,
-        periodo: 'sobre lotes fora de padrão',
+        periodo: 'de comissão sobre os lotes fora de padrão',
         destaque: false,
         features: [
             'Lotes semanais agregados',
@@ -78,7 +78,10 @@ const planos = [
     },
 ]
 
-export default function Planos() {
+// em /produtores o card do consumidor sai (a Home ja mostra a taxa de retirada)
+export default function Planos({ semConsumidor = false }: { semConsumidor?: boolean }) {
+    const visiveis = semConsumidor ? planos.filter((p) => p.id !== 'plano-consumidor') : planos
+
     return (
         <section id="secao-planos">
             <div className="titulo-secao anima-scroll">
@@ -87,8 +90,8 @@ export default function Planos() {
                 <p>Sem mensalidade para o produtor · sem fidelidade para ninguém</p>
             </div>
 
-            <div id="grade-planos" className="grade-planos-4 anima-scroll">
-                {planos.map((plano) => (
+            <div id="grade-planos" className={`${visiveis.length === 3 ? 'grade-planos-3' : 'grade-planos-4'} anima-scroll`}>
+                {visiveis.map((plano) => (
                     <div className="card-plano" id={plano.destaque ? 'plano-destaque' : plano.id} key={plano.id}>
                         {plano.destaque && <span className="badge-popular">✦ Entrada grátis</span>}
                         <h3 className="nome-plano">{plano.nome}</h3>
@@ -108,7 +111,7 @@ export default function Planos() {
                 ))}
             </div>
 
-            <p id="rodape-planos">Valores do piloto (Grande São Paulo) — estimativas a validar na operação real</p>
+            <p id="rodape-planos">Valores do piloto na Grande São Paulo.</p>
         </section>
     )
 }

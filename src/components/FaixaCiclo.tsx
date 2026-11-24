@@ -3,6 +3,15 @@
 import { useEffect, useState } from 'react'
 import { useCiclo } from '@/context/CicloContext'
 import { proximaAbertura, proximoFechamento, ROTULO_FASE, tempoAte, type TempoRestante } from '@/lib/ciclo'
+import type { FaseCiclo } from '@/types'
+
+// antes "colheita", "retirada" e "encerrado" mostravam a mesma frase
+const MENSAGEM_FASE: Record<FaseCiclo, string> = {
+    aberto: 'Faça seu pedido até quarta às 20h. O produtor colhe só o que foi vendido e entrega no sábado.',
+    colheita: 'Pedidos fechados: os produtores estão colhendo só o que foi vendido. Retirada no sábado, das 9h às 13h.',
+    retirada: 'Hoje é dia de retirada: leve o QR do pedido ao seu ponto até as 13h. Novos pedidos a partir de segunda.',
+    encerrado: 'Ciclo encerrado: o que não foi retirado virou doação. Novos pedidos a partir de segunda.',
+}
 
 function Contagem({ tempo }: { tempo: TempoRestante }) {
     const partes: [number, string][] = [
@@ -44,9 +53,7 @@ export default function FaixaCiclo() {
             <div>
                 <strong>{aberto ? '🟢' : '🟡'} {ROTULO_FASE[fase]}</strong>
                 <p>
-                    {aberto
-                        ? 'Faça seu pedido até quarta às 20h. O produtor colhe só o que foi vendido e entrega no sábado.'
-                        : 'Os produtores estão colhendo e entregando os pedidos desta semana. Novos pedidos a partir de segunda.'}
+                    {MENSAGEM_FASE[fase]}
                     {faseManual && ' (fase fixada pelo modo demonstração)'}
                 </p>
             </div>

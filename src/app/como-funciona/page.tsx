@@ -30,14 +30,14 @@ const etapas: Etapa[] = [
     {
         papel: 'Segunda a quarta 20h · Consumidor',
         titulo: 'Encomenda e pagamento retido',
-        texto: 'O consumidor monta a cesta, escolhe o ponto de retirada e paga via Pix. O valor fica em custódia num intermediador de pagamento com split — a AgroAlert não guarda o dinheiro na própria conta.',
-        destaque: `Pedido típico: R$ 80 em produtos + R$ ${TAXAS.taxaRetirada} de taxa de retirada (R$ ${TAXAS.parteFrete} frete da rota + R$ ${TAXAS.partePonto} ponto).`,
+        texto: 'O consumidor monta a cesta, escolhe o ponto de retirada e paga via Pix. O valor fica guardado por um intermediador de pagamento — e não na conta do AgroAlert — até a retirada.',
+        destaque: `Exemplo: R$ 80 em produtos + R$ ${TAXAS.taxaRetirada} de taxa de retirada (R$ ${TAXAS.parteFrete} para a rota e R$ ${TAXAS.partePonto} para o ponto).`,
         itens: [`Assinatura semanal da mesma cesta: ${Math.round(TAXAS.descontoAssinatura * 100)}% de desconto.`, 'A regra de não retirada (vira doação) é aceita antes do pagamento.'],
     },
     {
         papel: 'Quarta 20h · Sistema',
         titulo: 'Fechamento do ciclo e romaneio',
-        texto: 'Os pedidos fecham e cada produtor recebe o romaneio: quanto colher de cada item e para qual pedido. Um ponto com menos de 10 pedidos tem os pedidos redirecionados ao ponto mais próximo, com aviso.',
+        texto: 'Os pedidos fecham e cada produtor recebe o romaneio: quanto colher de cada item e para qual pedido. Se um ponto tiver menos de 10 pedidos na semana, eles vão para o ponto mais próximo — e o consumidor é avisado.',
     },
     {
         papel: 'Quinta e sexta · Produtor',
@@ -104,13 +104,13 @@ export default function ComoFuncionaPagina() {
                 <div className="bloco-geo anima-scroll">
                     <h3>Em foco: alerta de clima para a colheita</h3>
                     <p>
-                        O painel do produtor consulta a previsão da propriedade (Open-Meteo). Geada, ventania ou chuva forte
+                        O painel do produtor consulta a previsão do tempo da propriedade. Geada, ventania ou chuva forte
                         viram uma recomendação prática no ciclo: <strong>antecipar a colheita</strong> e ofertar antes da perda,
                         ou <strong>reduzir a quantidade prometida</strong> para não gerar estornos.
                     </p>
                     <p>
                         E por que a associação no meio? Ela é o hub rural: confere a qualidade, emite a nota fiscal, faz a ponte
-                        com a OCS dos selos e monta os lotes &quot;fora de padrão&quot; para a indústria e as doações.
+                        com a organização que confere os selos (OCS) e monta os lotes &quot;fora de padrão&quot; para a indústria e as doações.
                     </p>
                 </div>
 
